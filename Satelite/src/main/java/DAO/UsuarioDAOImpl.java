@@ -29,7 +29,7 @@ public class UsuarioDAOImpl implements IUsuarioDAO {
             return _usuario;
             
         } catch (Exception e) {
-            throw new IllegalArgumentException("Ha ocurrido un error: " +e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 }
