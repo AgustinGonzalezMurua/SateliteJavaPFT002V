@@ -7,7 +7,7 @@ import org.json.simple.parser.JSONParser;
  * @author Agustin
  */
 public interface IUsuarioDAO {
-    //Se declara el parser ya que es utilizado siempreprivate final JSONParser parser = new JSONParser();
+    //Se declara el parser ya que es utilizado siempre.
     final JSONParser JSONPARSER = new JSONParser();
     //Inicia el controlador del cliente
     final org.tempuri.IControladorServicio SERVICIO = new Servicio().GetConeccion();

@@ -4,6 +4,7 @@ public class Usuario {
     public String RUN;
     public int tipo;
     public String Nombre;
+ 
 
     @Override
     public String toString() {

@@ -14,13 +14,19 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
+    private DTO.Usuario usuario;
+    
     public MainFrame() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
     }
 
     public void CargarDatos(DTO.Usuario usuario){
-        this.jLabelNombreUsuario.setText(usuario.Nombre);
+        this.usuario = usuario;
+        this.jLabelNombreUsuario.setText(this.usuario.Nombre);
+        
+        
     }
     
     /**
