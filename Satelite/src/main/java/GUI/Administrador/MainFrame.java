@@ -15,8 +15,8 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form MainFrame
      */
     public MainFrame() {
-        
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     public void CargarDatos(DTO.Usuario usuario){
@@ -39,6 +39,8 @@ public class MainFrame extends javax.swing.JFrame {
         jPanelContenido = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("E-Ticket Administración");
+        setResizable(false);
 
         jLabelMensajeBienvenida.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelMensajeBienvenida.setText("Bienvenido");
