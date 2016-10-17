@@ -10,7 +10,7 @@ public class UsuarioDAOImpl implements IUsuarioDAO {
         
         try {            
             //Consume un método del servicio
-            String result = SERVICIO.validarUsuario(run, contrasena);
+            String result = SERVICIO.validarUsuario(run, contrasena);            
             //Convierte el resultado en un objeto
             JSONObject _resultado = (JSONObject)JSONPARSER.parse(result);
             
@@ -31,5 +31,17 @@ public class UsuarioDAOImpl implements IUsuarioDAO {
         } catch (Exception e) {
             throw new IllegalArgumentException(e.getMessage());
         }
+    }
+
+    @Override
+    public Usuario CrearUsuario(String nombre, String run, int telefono, String email, int tipo_usuario, String contrasena) {
+        Usuario _usuario = new Usuario();
+        try {
+             //String result = SERVICIO.registrarUsuario(run);
+             return _usuario;
+        } catch (Exception e) {
+            throw new IllegalArgumentException(e.getMessage());
+        }
+ 
     }
 }

@@ -43,6 +43,10 @@ public class MainFrame extends javax.swing.JFrame {
         jLabelNombreUsuario = new javax.swing.JLabel();
         jSeparatorDespliegueContenido = new javax.swing.JSeparator();
         jPanelContenido = new javax.swing.JPanel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuAdministrador = new javax.swing.JMenu();
+        jMenuItemCrearUsuarios = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("E-Ticket Administración");
@@ -78,8 +82,25 @@ public class MainFrame extends javax.swing.JFrame {
         );
         jPanelContenidoLayout.setVerticalGroup(
             jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 361, Short.MAX_VALUE)
+            .addGap(0, 340, Short.MAX_VALUE)
         );
+
+        jMenuAdministrador.setText("Administrar Usuarios");
+
+        jMenuItemCrearUsuarios.setText("Crear Usuarios");
+        jMenuItemCrearUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCrearUsuariosActionPerformed(evt);
+            }
+        });
+        jMenuAdministrador.add(jMenuItemCrearUsuarios);
+
+        jMenuBar1.add(jMenuAdministrador);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,6 +128,12 @@ public class MainFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItemCrearUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCrearUsuariosActionPerformed
+        GUI.Administrador.AdministradorDeUsuarios CrearUsuarios = new GUI.Administrador.AdministradorDeUsuarios();
+        
+        CrearUsuarios.setVisible(true);
+    }//GEN-LAST:event_jMenuItemCrearUsuariosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,6 +173,10 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabelMensajeBienvenida;
     private javax.swing.JLabel jLabelNombreUsuario;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenuAdministrador;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItemCrearUsuarios;
     private javax.swing.JPanel jPanelContenido;
     private javax.swing.JPanel jPanelDespliegueDatos;
     private javax.swing.JSeparator jSeparatorDespliegueContenido;
