@@ -5,28 +5,46 @@
  */
 package DTO;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 /**
  *
  * @author Agus
  */
 public class Organizacion {
-    private String Run;
+    private String RUT;
     private String Nombre;
     private String RazonSocial;
     private String Direccion;
-    private String Telefono;
+    private Comuna Comuna;
+    private String Fono;
+    private String Email;
     private boolean Estado;
     private Usuario Organizador;
 
     public Organizacion() {
     }
 
-    public String getRun() {
-        return Run;
+    public Organizacion(JSONObject json) throws ParseException {
+        this.RUT            = json.get("RUT").toString();
+        this.Nombre         = json.get("Nombre").toString();
+        this.RazonSocial    = json.get("RazonSocial").toString();
+        this.Direccion      = json.get("Direccion").toString();
+        this.Comuna         = new Comuna((JSONObject) new JSONParser().parse(json.get("Comuna").toString()));
+        this.Fono           = json.get("Fono").toString();
+        this.Email          = json.get("Email").toString();
+        this.Estado         = Boolean.parseBoolean(json.get("Estado").toString());
+        this.Organizador    = new Usuario((JSONObject) new JSONParser().parse(json.get("Organizador").toString()));
+    }
+    
+    public String getRUT() {
+        return RUT;
     }
 
-    public void setRun(String Run) {
-        this.Run = Run;
+    public void setRUT(String Run) {
+        this.RUT = Run;
     }
 
     public String getNombre() {
@@ -53,12 +71,12 @@ public class Organizacion {
         this.Direccion = Direccion;
     }
 
-    public String getTelefono() {
-        return Telefono;
+    public String getFono() {
+        return Fono;
     }
 
-    public void setTelefono(String Telefono) {
-        this.Telefono = Telefono;
+    public void setFono(String Telefono) {
+        this.Fono = Telefono;
     }
 
     public boolean isEstado() {
@@ -77,8 +95,16 @@ public class Organizacion {
         this.Organizador = Organizador;
     }
 
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String Email) {
+        this.Email = Email;
+    }
+    
     @Override
     public String toString() {
-        return "Organizacion{" + "Run=" + Run + ", Nombre=" + Nombre + ", RazonSocial=" + RazonSocial + ", Direccion=" + Direccion + ", Telefono=" + Telefono + ", Estado=" + Estado + ", Organizador=" + Organizador + '}';
+        return "Organizacion{" + "RUT=" + RUT + ", Nombre=" + Nombre + ", RazonSocial=" + RazonSocial + ", Direccion=" + Direccion + ", Telefono=" + Fono + ", Email=" + Email + ", Estado=" + Estado + ", Organizador=" + Organizador + '}';
     }
 }

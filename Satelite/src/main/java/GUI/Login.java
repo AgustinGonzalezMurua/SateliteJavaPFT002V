@@ -157,15 +157,23 @@ public class Login extends javax.swing.JFrame {
                 //Autenticación de usuario
                 DTO.Usuario _usuario = new DAO.UsuarioDAOImpl().Autenticar(_nombreUsuario, _contrasena);
                 //Deriva a Paneles correspondientes
-                if (_usuario.tipo == 1) {
-                    //Inicializa el panel
-                    GUI.Administrador.MainFrame AdministradorFrame = new GUI.Administrador.MainFrame();
-                    //Llama los métodos dentro que sean necesarios para hacer precarga de datos,
-                    AdministradorFrame.CargarDatos(_usuario);
-                    //Vuelve visible el panel para poder usarlo
-                    AdministradorFrame.setVisible(true);
-                }
-            
+                switch (_usuario.getTipo()){
+                    case 1:
+                        //Inicializa el panel
+                        GUI.Administrador.MainFrame AdministradorFrame = new GUI.Administrador.MainFrame();
+                        //Llama los métodos dentro que sean necesarios para hacer precarga de datos,
+                        AdministradorFrame.CargarDatos(_usuario);
+                        //Vuelve visible el panel para poder usarlo
+                        AdministradorFrame.setVisible(true);
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        GUI.Organizador.MainFrame OrganizadorFrame = new GUI.Organizador.MainFrame();
+                        OrganizadorFrame.CargarDatos(_usuario);
+                        OrganizadorFrame.setVisible(true);
+                        break;
+                }            
                 //Cierra la ventana actual
                 this.dispose();
             }else{

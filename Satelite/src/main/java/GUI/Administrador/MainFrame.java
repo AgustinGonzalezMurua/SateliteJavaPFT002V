@@ -24,7 +24,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     public void CargarDatos(DTO.Usuario usuario){
         this.usuario = usuario;
-        this.jLabelNombreUsuario.setText(this.usuario.Nombre);
+        this.jLabelNombreUsuario.setText(this.usuario.getNombre());
         
         
     }

@@ -5,6 +5,11 @@
  */
 package GUI.Organizador;
 
+import DTO.*;
+import java.util.ArrayList;
+import javax.swing.JTable;
+import Util.jTableModelEvento;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Agustin
@@ -15,18 +20,23 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form MainFrame
      */
     private DTO.Usuario usuario;
+    private DTO.Organizacion organizacion;
+    private ArrayList<Evento> eventos;
     
     public MainFrame() {
         initComponents();
         this.setLocationRelativeTo(null);
-        
     }
 
     public void CargarDatos(DTO.Usuario usuario){
         this.usuario = usuario;
-        this.jLabelNombreUsuario.setText(this.usuario.Nombre);
-        
-        
+        this.jLabelNombreUsuario.setText(this.usuario.getNombre());
+        this.organizacion = new DAO.OrganizacionDAOImpl().RecuperarOrganizacion_RUN(this.usuario);
+        this.jLabelNombreOrganizacion.setText(this.organizacion.getNombre());
+        this.eventos = new DAO.OrganizacionDAOImpl().RecuperarEventos(organizacion);
+        for (Evento evento : eventos) {
+            ((Util.jTableModelEvento)jTableEventos.getModel()).addRow(evento);
+        }
     }
     
     /**
@@ -66,7 +76,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jPanelDespliegueDatosLayout.createSequentialGroup()
                 .addComponent(jLabelMensajeBienvenida)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelNombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 558, Short.MAX_VALUE)
+                .addComponent(jLabelNombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanelDespliegueDatosLayout.setVerticalGroup(
@@ -76,20 +86,10 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jLabelNombreUsuario))
         );
 
-        jTableEventos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        jTableEventos.setModel(new Util.jTableModelEvento());
         jScrollPaneEventos.setViewportView(jTableEventos);
 
-        jLabelTitulo.setText("Administrar Eventos de");
+        jLabelTitulo.setText("Administrar Eventos de:");
 
         jButtonEliminarEvento.setText("Eliminar");
         jButtonEliminarEvento.addActionListener(new java.awt.event.ActionListener() {
@@ -114,7 +114,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jPanelContenidoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPaneEventos, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
+                    .addComponent(jScrollPaneEventos, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelContenidoLayout.createSequentialGroup()
                         .addComponent(jLabelTitulo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

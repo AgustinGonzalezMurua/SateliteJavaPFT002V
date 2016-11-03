@@ -6,6 +6,7 @@
 package DTO;
 
 import java.util.ArrayList;
+import org.json.simple.JSONObject;
 
 /**
  *
@@ -19,6 +20,19 @@ public class Recinto {
     private String Fono;
     private ArrayList<Ubicacion> Ubicaciones;
 
+    public Recinto() {
+    }
+
+    public Recinto(JSONObject json) {
+        this.Codigo             = Integer.parseInt(json.get("Codigo").toString());
+        this.Nombre             = json.get("Nombre").toString();
+        this.Direccion          = json.get("Direccion").toString();
+        this.CapacidadMaxima    = Integer.parseInt(json.get("CapacidadMaxima").toString());
+        this.Fono               = json.get("Fono").toString();
+    }
+
+    
+    
     public int getCodigo() {
         return Codigo;
     }
