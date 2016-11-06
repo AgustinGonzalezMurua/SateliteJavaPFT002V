@@ -7,7 +7,6 @@ package Util;
 
 import DTO.Evento;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,25 +16,41 @@ import javax.swing.table.DefaultTableModel;
 public class jTableModelEvento extends DefaultTableModel{
 
     public jTableModelEvento() {
+        this.addColumn("Codigo");
         this.addColumn("Nombre");
         this.addColumn("Fecha");
         this.addColumn("Fecha Creación");
         this.addColumn("Tipo");
         this.addColumn("Recinto");
         this.addColumn("Organización");
+        
     }
 
-    public void addRow(Evento evento) {
+    public void cargarDatos(Evento evento) {
         SimpleDateFormat sdt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         
         super.addRow(new Object[]{
-            evento.getNombre()
+            evento.getCodigo()
+            ,evento.getNombre()
             ,sdt.format(evento.getFecha())
             ,sdt.format(evento.getFechaCreacion())
-            ,evento.getTipo()
+            ,evento.getTipo().getDescripcion()
             ,evento.getRecinto().getNombre()
             ,evento.getOrganizacion().getNombre()});
     }
     
+    public boolean[] editable = new boolean[]{
+        false
+        ,true
+        ,true
+        ,true
+        ,true
+        ,true
+        ,true
+    };
     
+    @Override
+    public boolean isCellEditable(int row, int column){
+        return editable[column];
+    }
 }

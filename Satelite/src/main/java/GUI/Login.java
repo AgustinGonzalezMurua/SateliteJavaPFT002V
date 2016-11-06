@@ -181,10 +181,11 @@ public class Login extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this,
-                e.getMessage(),
-                "Error de acceso",
+                "Ha ocurrido un error: \n" +  e.getMessage(),
+                "Error",
                 JOptionPane.ERROR_MESSAGE);
         }
+        
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
     /**

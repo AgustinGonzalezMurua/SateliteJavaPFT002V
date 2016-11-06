@@ -20,7 +20,7 @@ import java.util.Iterator;
 public class OrganizacionDAOImpl implements IOrganizacionDAO {
 
     @Override
-    public Organizacion RecuperarOrganizacio_RUT(String RUT) {
+    public Organizacion RecuperarOrganizacion_RUT(String RUT) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

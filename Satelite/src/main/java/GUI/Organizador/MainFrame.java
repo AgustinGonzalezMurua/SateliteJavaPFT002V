@@ -27,16 +27,18 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-
+                
     public void CargarDatos(DTO.Usuario usuario){
         this.usuario = usuario;
         this.jLabelNombreUsuario.setText(this.usuario.getNombre());
         this.organizacion = new DAO.OrganizacionDAOImpl().RecuperarOrganizacion_RUN(this.usuario);
         this.jLabelNombreOrganizacion.setText(this.organizacion.getNombre());
         this.eventos = new DAO.OrganizacionDAOImpl().RecuperarEventos(organizacion);
-        for (Evento evento : eventos) {
-            ((Util.jTableModelEvento)jTableEventos.getModel()).addRow(evento);
-        }
+        
+        eventos.forEach((evento) -> {
+            ((Util.jTableModelEvento)jTableEventos.getModel()).cargarDatos(evento);
+        });
+        ((Util.jTableModelEvento)this.jTableEventos.getModel()).isCellEditable(ERROR, NORMAL);
     }
     
     /**
@@ -76,7 +78,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jPanelDespliegueDatosLayout.createSequentialGroup()
                 .addComponent(jLabelMensajeBienvenida)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelNombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
+                .addComponent(jLabelNombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanelDespliegueDatosLayout.setVerticalGroup(
@@ -114,7 +116,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jPanelContenidoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPaneEventos, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+                    .addComponent(jScrollPaneEventos, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelContenidoLayout.createSequentialGroup()
                         .addComponent(jLabelTitulo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -173,7 +175,12 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonEliminarEventoActionPerformed
 
     private void jButtonNuevoEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoEventoActionPerformed
-        // TODO add your handling code here:
+        try {
+            EventoFrame nuevo = new EventoFrame(this, true);
+            nuevo.CargarDatos(organizacion);
+            nuevo.setVisible(true);
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_jButtonNuevoEventoActionPerformed
 
     /**

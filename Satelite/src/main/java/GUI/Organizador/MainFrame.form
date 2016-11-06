@@ -59,7 +59,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jLabelMensajeBienvenida" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jLabelNombreUsuario" pref="738" max="32767" attributes="0"/>
+                  <Component id="jLabelNombreUsuario" pref="788" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -99,7 +99,7 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPaneEventos" alignment="0" pref="800" max="32767" attributes="0"/>
+                      <Component id="jScrollPaneEventos" alignment="0" pref="850" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jLabelTitulo" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>

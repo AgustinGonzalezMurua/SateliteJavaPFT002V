@@ -16,24 +16,27 @@ import org.json.simple.parser.ParseException;
  * @author Agus
  */
 public class Evento {
+    private int Codigo;
     private String Nombre;
     private Date Fecha;
     private Date FechaCreacion;
-    private String Tipo;
+    private TipoGeneric Tipo;
     private Recinto Recinto;
     private Organizacion Organizacion;
     private boolean Estado;
 
+    public SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+    
     public Evento() {
     }
 
     public Evento(JSONObject json) throws ParseException, java.text.ParseException {
-        SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         
+        this.Codigo         = Integer.parseInt(json.get("Codigo").toString());
         this.Nombre         = json.get("Nombre").toString();
         this.Fecha          = sdt.parse(json.get("Fecha").toString());
         this.FechaCreacion  = sdt.parse(json.get("FechaCreacion").toString());
-        this.Tipo           = json.get("Tipo").toString();
+        this.Tipo           = new TipoGeneric((JSONObject) new JSONParser().parse(json.get("Tipo").toString()));
         this.Recinto        = new Recinto((JSONObject) new JSONParser().parse(json.get("Recinto").toString()));
         this.Organizacion   = new Organizacion ((JSONObject) new JSONParser().parse(json.get("Organizacion").toString()));
         this.Estado         = Boolean.getBoolean(json.get("Estado").toString());
@@ -63,13 +66,14 @@ public class Evento {
         this.FechaCreacion = FechaCreacion;
     }
 
-    public String getTipo() {
+    public TipoGeneric getTipo() {
         return Tipo;
     }
 
-    public void setTipo(String tipo) {
-        this.Tipo = tipo;
+    public void setTipo(TipoGeneric Tipo) {
+        this.Tipo = Tipo;
     }
+
 
     public Recinto getRecinto() {
         return Recinto;
@@ -95,8 +99,17 @@ public class Evento {
         this.Estado = Estado;
     }
 
+    public int getCodigo() {
+        return Codigo;
+    }
+
+    public void setCodigo(int Codigo) {
+        this.Codigo = Codigo;
+    }
+
     @Override
     public String toString() {
-        return "Evento{" + "Nombre=" + Nombre + ", Fecha=" + Fecha + ", FechaCreacion=" + FechaCreacion + ", Tipo=" + Tipo + ", Recinto=" + Recinto + ", Organizacion=" + Organizacion + ", Estado=" + Estado + '}';
-    }    
+        return "Evento{" + "Codigo=" + Codigo + ", Nombre=" + Nombre + ", Fecha=" + Fecha + ", FechaCreacion=" + FechaCreacion + ", Tipo=" + Tipo + ", Recinto=" + Recinto + ", Organizacion=" + Organizacion + ", Estado=" + Estado + '}';
+    }
+
 }

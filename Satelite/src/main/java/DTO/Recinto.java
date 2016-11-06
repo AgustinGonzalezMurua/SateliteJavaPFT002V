@@ -7,6 +7,8 @@ package DTO;
 
 import java.util.ArrayList;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -16,6 +18,7 @@ public class Recinto {
     private int Codigo;
     private String Nombre;
     private String Direccion;
+    private Comuna Comuna;
     private int CapacidadMaxima;
     private String Fono;
     private ArrayList<Ubicacion> Ubicaciones;
@@ -23,10 +26,11 @@ public class Recinto {
     public Recinto() {
     }
 
-    public Recinto(JSONObject json) {
+    public Recinto(JSONObject json) throws ParseException {
         this.Codigo             = Integer.parseInt(json.get("Codigo").toString());
         this.Nombre             = json.get("Nombre").toString();
         this.Direccion          = json.get("Direccion").toString();
+        this.Comuna             = new Comuna((JSONObject) new JSONParser().parse(json.get("Comuna").toString()));
         this.CapacidadMaxima    = Integer.parseInt(json.get("CapacidadMaxima").toString());
         this.Fono               = json.get("Fono").toString();
     }
@@ -88,4 +92,13 @@ public class Recinto {
     public void RemoverUbicacion(Ubicacion ubicacion){
         this.Ubicaciones.remove(ubicacion);
     }
+
+    public Comuna getComuna() {
+        return Comuna;
+    }
+
+    public void setComuna(Comuna Comuna) {
+        this.Comuna = Comuna;
+    }
+   
 }
