@@ -100,5 +100,17 @@ public class Recinto {
     public void setComuna(Comuna Comuna) {
         this.Comuna = Comuna;
     }
-   
+
+    @Override
+    public String toString() {
+        return "{" 
+                + "\"Codigo\" : \"" + Codigo + "\","
+                + "\"Nombre\" : \"" + Nombre + "\","
+                + "\"Direccion\" : \"" + Direccion + "\","
+                + "\"Comuna\" : " + Comuna + ","
+                + "\"CapacidadMaxima\" : \"" + CapacidadMaxima + "\","
+                + "\"Fono\" : \"" + Fono + "\","
+                + "\"Ubicaciones\" : \"" + Ubicaciones + "\""
+                + '}';
+    }
 }

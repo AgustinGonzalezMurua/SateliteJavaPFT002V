@@ -49,6 +49,16 @@ public class Ubicacion {
     public void setHabilitado(boolean Habilitado) {
         this.Habilitado = Habilitado;
     }
+
+    @Override
+    public String toString() {
+        return "{"
+                + "\"Codigo\" : \"" + Codigo + "\","
+                + "\"Numero\" : \"" + Numero + "\","
+                + "\"Fila\" : \"" + Fila + "\","
+                + "\"Habilitado\" : \"" + Habilitado + "\""
+                + '}';
+    }
     
     
 }

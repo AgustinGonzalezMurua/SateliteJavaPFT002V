@@ -8,7 +8,7 @@ package GUI.Organizador;
 import DTO.*;
 import java.util.ArrayList;
 import javax.swing.JTable;
-import Util.jTableModelEvento;
+import Util.jTableModels.jTableModelEvento;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -31,14 +31,19 @@ public class MainFrame extends javax.swing.JFrame {
     public void CargarDatos(DTO.Usuario usuario){
         this.usuario = usuario;
         this.jLabelNombreUsuario.setText(this.usuario.getNombre());
-        this.organizacion = new DAO.OrganizacionDAOImpl().RecuperarOrganizacion_RUN(this.usuario);
+        this.organizacion = new DAO.ImplOrganizacionDAO().RecuperarOrganizacion_RUN(this.usuario);
         this.jLabelNombreOrganizacion.setText(this.organizacion.getNombre());
-        this.eventos = new DAO.OrganizacionDAOImpl().RecuperarEventos(organizacion);
+        this.refrescarEventos();
+    }
+    
+    public void refrescarEventos(){
+        ((Util.jTableModels.jTableModelEvento)jTableEventos.getModel()).removerDatos();
         
+        this.eventos = new DAO.ImplOrganizacionDAO().RecuperarEventos(organizacion);
         eventos.forEach((evento) -> {
-            ((Util.jTableModelEvento)jTableEventos.getModel()).cargarDatos(evento);
+            ((Util.jTableModels.jTableModelEvento)jTableEventos.getModel()).cargarDatos(evento);
         });
-        ((Util.jTableModelEvento)this.jTableEventos.getModel()).isCellEditable(ERROR, NORMAL);
+        ((Util.jTableModels.jTableModelEvento)this.jTableEventos.getModel()).isCellEditable(0, 0);
     }
     
     /**
@@ -88,7 +93,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jLabelNombreUsuario))
         );
 
-        jTableEventos.setModel(new Util.jTableModelEvento());
+        jTableEventos.setModel(new Util.jTableModels.jTableModelEvento());
         jScrollPaneEventos.setViewportView(jTableEventos);
 
         jLabelTitulo.setText("Administrar Eventos de:");

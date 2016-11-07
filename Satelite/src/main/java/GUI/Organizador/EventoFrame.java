@@ -9,7 +9,6 @@ package GUI.Organizador;
 import DTO.Recinto;
 import DTO.TipoGeneric;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,8 +18,8 @@ import javax.swing.JOptionPane;
 public class EventoFrame extends javax.swing.JDialog {
 
     private DTO.Evento evento = new DTO.Evento();
-    private ArrayList<TipoGeneric> tipoEventos = new DAO.TipoGenericsDAOImpl().RecuperarTipoEventos();
-    private ArrayList<Recinto> recintos = new DAO.RecintoDAOImpl().RecuperarRecinto_Todos();
+    private ArrayList<TipoGeneric> tipoEventos = new DAO.ImplTipoGenericsDAO().RecuperarTipoEventos();
+    private ArrayList<Recinto> recintos = new DAO.ImplRecintoDAO().RecuperarRecinto_Todos();
         
     /** Creates new form NuevoEvento */
     public EventoFrame(java.awt.Frame parent, boolean modal) {
@@ -37,7 +36,7 @@ public class EventoFrame extends javax.swing.JDialog {
         
         this.jListTiposEventos.setModel(new Util.jListModelTipoGenerics(tipoEventos));
         recintos.forEach((recinto) ->{
-            ((Util.jTableModelRecinto)jTableRecintos.getModel()).cargarDatos(recinto);
+            ((Util.jTableModels.jTableModelRecinto)jTableRecintos.getModel()).cargarDatos(recinto);
         });
     }
      
@@ -89,7 +88,6 @@ public class EventoFrame extends javax.swing.JDialog {
         dateChooserComboFecha = new datechooser.beans.DateChooserCombo();
 
         jDialogTipoEvento.setModal(true);
-        jDialogTipoEvento.setPreferredSize(new java.awt.Dimension(300, 220));
         jDialogTipoEvento.setResizable(false);
         jDialogTipoEvento.setSize(new java.awt.Dimension(0, 0));
 
@@ -164,7 +162,7 @@ public class EventoFrame extends javax.swing.JDialog {
 
         jButtonBuscarRecinto.setText("Buscar");
 
-        jTableRecintos.setModel(new Util.jTableModelRecinto());
+        jTableRecintos.setModel(new Util.jTableModels.jTableModelRecinto());
         jScrollPaneRecinto.setViewportView(jTableRecintos);
 
         jButtonListoRecintos.setText("Listo");
@@ -361,7 +359,7 @@ public class EventoFrame extends javax.swing.JDialog {
             .addGroup(jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                 .addComponent(jLabelNuevoEventoFecha)
                 .addComponent(dateChooserComboFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGap(16, 16, 16)
             .addComponent(jButtonNuevoEventoAgregar)
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
@@ -397,7 +395,12 @@ public class EventoFrame extends javax.swing.JDialog {
         try {
             this.evento.setNombre(jTextFieldNuevoEventoNombre.getText());
             this.evento.setFecha(dateChooserComboFecha.getSelectedDate().getTime());
-            
+            new DAO.ImplEventoDAO().AgregarNuevoEvento(evento);
+            JOptionPane.showMessageDialog(this,
+                "Evento agregado exitosamente",
+                "Agregado",
+                JOptionPane.PLAIN_MESSAGE);
+            ((GUI.Organizador.MainFrame)this.getParent()).refrescarEventos();
             this.dispose();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this,

@@ -42,6 +42,10 @@ public class Usuario {
     
     @Override
     public String toString() {
-        return "Usuario{" + "RUN=" + RUN + ", tipo=" + tipo + ", Nombre=" + Nombre + '}';
+        return "{"
+                + "\"RUN\" : \"" + RUN + "\","
+                + "\"tipo\" : \"" + tipo + "\","
+                + "\"Nombre\" : \"" + Nombre + "\"" 
+                +'}';
     }
 }

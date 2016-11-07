@@ -102,9 +102,22 @@ public class Organizacion {
     public void setEmail(String Email) {
         this.Email = Email;
     }
-    
+
     @Override
     public String toString() {
-        return "Organizacion{" + "RUT=" + RUT + ", Nombre=" + Nombre + ", RazonSocial=" + RazonSocial + ", Direccion=" + Direccion + ", Telefono=" + Fono + ", Email=" + Email + ", Estado=" + Estado + ", Organizador=" + Organizador + '}';
+        return "{" 
+                + "\"RUT\" : \"" + RUT + "\","
+                + "\"Nombre\" : \"" + Nombre + "\","
+                + "\"RazonSocial\" : \"" + RazonSocial + "\","
+                + "\"Direccion\" : \"" + Direccion + "\","
+                + "\"Comuna\" : " + Comuna + ","
+                + "\"Fono\" : \"" + Fono + "\","
+                + "\"Email\" : \"" + Email + "\","
+                + "\"Estado\" :" + Estado + ","
+                + "\"Organizador\" : " + Organizador 
+                + '}';
     }
+
+
+    
 }

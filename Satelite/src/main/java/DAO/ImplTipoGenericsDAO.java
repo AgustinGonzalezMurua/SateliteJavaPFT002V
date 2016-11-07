@@ -5,9 +5,7 @@
  */
 package DAO;
 
-import static DAO.IBaseDAO.JSONPARSER;
-import static DAO.IBaseDAO.SERVICIO;
-import DTO.Recinto;
+import DTO.TipoGeneric;
 import Exceptions.ServiceError;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -15,14 +13,14 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 
-public class RecintoDAOImpl implements IRecintoDAO {
+public class ImplTipoGenericsDAO implements ITipoGenericsDAO {
 
     @Override
-    public ArrayList<Recinto> RecuperarRecinto_Todos() {
+    public ArrayList<TipoGeneric> RecuperarTipoEventos() {
         try {
-            ArrayList<Recinto> _recintos = new ArrayList<>();
+            ArrayList<TipoGeneric> _tipoEventos = new ArrayList<>();
             
-            String result = SERVICIO.recuperarRecintoTodos();
+            String result = SERVICIO.recuperarTipoEventos();
             Object _resultado = JSONPARSER.parse(result);
             
             if (!ContieneErrores(_resultado)){
@@ -31,19 +29,19 @@ public class RecintoDAOImpl implements IRecintoDAO {
                 Iterator iterator = _jeventos.iterator();
                 
                 while(iterator.hasNext()){
-                    JSONObject jsonObject = (JSONObject) iterator.next();
-                    DTO.Recinto _recinto = new DTO.Recinto(jsonObject);
-                    _recintos.add(_recinto);
+                    JSONObject _jTipoEvento = (JSONObject) iterator.next();
+                    DTO.TipoGeneric _tipoEvento = new DTO.TipoGeneric(_jTipoEvento);
+                    _tipoEventos.add(_tipoEvento);
                 }
             }
             
-            return _recintos;
+            return _tipoEventos;
         } catch (Exception e) {
             throw new IllegalArgumentException(e.getMessage());
         }
     }
     
-        private boolean ContieneErrores(Object obj) throws ServiceError{
+    private boolean ContieneErrores(Object obj) throws ServiceError{
         if (obj instanceof JSONObject) {
                 if (((JSONObject)obj).containsKey("Error")) {
                     throw new ServiceError("Ha ocurrido un error: " + ((JSONObject)obj).get("Error").toString());

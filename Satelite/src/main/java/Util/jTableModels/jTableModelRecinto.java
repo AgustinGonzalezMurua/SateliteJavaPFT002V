@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Util;
+package Util.jTableModels;
 
 import java.text.SimpleDateFormat;
 import javax.swing.table.DefaultTableModel;

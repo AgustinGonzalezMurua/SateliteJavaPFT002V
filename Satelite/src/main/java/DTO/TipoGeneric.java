@@ -38,6 +38,9 @@ public class TipoGeneric {
 
     @Override
     public String toString() {
-        return "TipoGeneric{" + "Codigo=" + Codigo + ", Descripcion=" + Descripcion + '}';
+        return "{" 
+                + "\"Codigo\" : \"" + Codigo + "\""
+                + ",\"Descripcion \": \"" + Descripcion + "\"" +
+                '}';
     }
 }

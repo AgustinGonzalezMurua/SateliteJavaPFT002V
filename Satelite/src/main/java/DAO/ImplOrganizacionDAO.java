@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 
-public class OrganizacionDAOImpl implements IOrganizacionDAO {
+public class ImplOrganizacionDAO implements IOrganizacionDAO {
 
     @Override
     public Organizacion RecuperarOrganizacion_RUT(String RUT) {

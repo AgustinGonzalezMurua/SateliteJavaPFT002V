@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Util;
+package Util.jTableModels;
 
 import DTO.Evento;
 import java.text.SimpleDateFormat;
@@ -52,5 +52,9 @@ public class jTableModelEvento extends DefaultTableModel{
     @Override
     public boolean isCellEditable(int row, int column){
         return editable[column];
+    }
+    
+    public void removerDatos(){
+        this.setRowCount(0);
     }
 }

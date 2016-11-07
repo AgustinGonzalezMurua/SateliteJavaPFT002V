@@ -38,6 +38,14 @@ public class Comuna {
     public void setNombre(String Comuna) {
         this.Nombre = Comuna;
     }
+
+    @Override
+    public String toString() {
+        return "{" + 
+                 "\"Codigo\" : \"" + Codigo + "\"" +
+                ",\"Nombre\" : \"" + Nombre + "\"" +
+                '}';
+    }
     
     
 }

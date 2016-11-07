@@ -155,7 +155,7 @@ public class Login extends javax.swing.JFrame {
             //Datos válidos
             if (!_nombreUsuario.isEmpty() && !_contrasena.isEmpty()) {
                 //Autenticación de usuario
-                DTO.Usuario _usuario = new DAO.UsuarioDAOImpl().Autenticar(_nombreUsuario, _contrasena);
+                DTO.Usuario _usuario = new DAO.ImplUsuarioDAO().Autenticar(_nombreUsuario, _contrasena);
                 //Deriva a Paneles correspondientes
                 switch (_usuario.getTipo()){
                     case 1:

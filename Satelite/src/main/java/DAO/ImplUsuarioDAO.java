@@ -5,7 +5,7 @@ import Exceptions.ServiceError;
 import org.json.simple.JSONObject;
 import java.security.MessageDigest;
 
-public class UsuarioDAOImpl implements IUsuarioDAO {    
+public class ImplUsuarioDAO implements IUsuarioDAO {    
     @Override
     public Usuario Autenticar(String run, String contrasena) {
         Usuario _usuario = new Usuario();

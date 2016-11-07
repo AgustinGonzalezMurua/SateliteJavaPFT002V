@@ -58,6 +58,11 @@ public class Evento {
         this.Fecha = Fecha;
     }
 
+    public String fechaToString(){
+        SimpleDateFormat _dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return _dateFormat.format(this.Fecha.getTime());
+    }
+    
     public Date getFechaCreacion() {
         return FechaCreacion;
     }
@@ -95,6 +100,14 @@ public class Evento {
         return Estado;
     }
 
+    public int estadoToString(){
+        if (Estado) {
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+    
     public void setEstado(boolean Estado) {
         this.Estado = Estado;
     }
@@ -109,7 +122,19 @@ public class Evento {
 
     @Override
     public String toString() {
-        return "Evento{" + "Codigo=" + Codigo + ", Nombre=" + Nombre + ", Fecha=" + Fecha + ", FechaCreacion=" + FechaCreacion + ", Tipo=" + Tipo + ", Recinto=" + Recinto + ", Organizacion=" + Organizacion + ", Estado=" + Estado + '}';
+        return "{" + 
+                     "\"Codigo\" : \"" + Codigo + "\"" +
+                    ",\"Nombre\" : \"" + Nombre + "\"" +
+                    ",\"Fecha\" : \"" + fechaToString() + "\"" +
+                    ",\"FechaCreacion\" : \"" + FechaCreacion + "\"" +
+                    ",\"Tipo\" : " + Tipo.getCodigo() +  
+                    ",\"Recinto\" : \"" + Recinto.getCodigo() + "\""+  
+                    ",\"Organizacion\" : \"" + Organizacion.getRUT() + "\"" +  
+                    ",\"Estado\" : " + estadoToString() +
+                "}";
     }
 
+    public String toJSONString(){
+        return org.json.simple.JSONValue.toJSONString(this);
+    }
 }
