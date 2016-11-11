@@ -36,7 +36,7 @@ public class EventoFrame extends javax.swing.JDialog {
         
         this.jListTiposEventos.setModel(new Util.jListModelTipoGenerics(tipoEventos));
         recintos.forEach((recinto) ->{
-            ((Util.jTableModels.jTableModelRecinto)jTableRecintos.getModel()).cargarDatos(recinto);
+            ((Util.jTableCustom.Models.jTableModelRecinto)jTableRecintos.getModel()).cargarDatos(recinto);
         });
     }
      
@@ -80,12 +80,12 @@ public class EventoFrame extends javax.swing.JDialog {
         jLabelNuevoEventoRecinto = new javax.swing.JLabel();
         jLabelNuevoEventoFecha = new javax.swing.JLabel();
         jTextFieldNuevoEventoNombre = new javax.swing.JTextField();
-        jTextFieldNuevoEventoRecinto = new javax.swing.JTextField();
         jTextFieldNuevoEventoTipo = new javax.swing.JTextField();
+        jTextFieldNuevoEventoRecinto = new javax.swing.JTextField();
         jButtonNuevoEventoTipo = new javax.swing.JButton();
         jButtonNuevoEventoRecinto = new javax.swing.JButton();
-        jButtonNuevoEventoAgregar = new javax.swing.JButton();
         dateChooserComboFecha = new datechooser.beans.DateChooserCombo();
+        jButtonNuevoEventoAgregar = new javax.swing.JButton();
 
         jDialogTipoEvento.setModal(true);
         jDialogTipoEvento.setResizable(false);
@@ -162,7 +162,7 @@ public class EventoFrame extends javax.swing.JDialog {
 
         jButtonBuscarRecinto.setText("Buscar");
 
-        jTableRecintos.setModel(new Util.jTableModels.jTableModelRecinto());
+        jTableRecintos.setModel(new Util.jTableCustom.Models.jTableModelRecinto());
         jScrollPaneRecinto.setViewportView(jTableRecintos);
 
         jButtonListoRecintos.setText("Listo");
@@ -238,9 +238,9 @@ public class EventoFrame extends javax.swing.JDialog {
         jLabelNuevoEventoFecha.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelNuevoEventoFecha.setText("Fecha");
 
-        jTextFieldNuevoEventoRecinto.setEnabled(false);
-
         jTextFieldNuevoEventoTipo.setEnabled(false);
+
+        jTextFieldNuevoEventoRecinto.setEnabled(false);
 
         jButtonNuevoEventoTipo.setText("Cambiar");
         jButtonNuevoEventoTipo.addActionListener(new java.awt.event.ActionListener() {
@@ -256,23 +256,16 @@ public class EventoFrame extends javax.swing.JDialog {
             }
         });
 
-        jButtonNuevoEventoAgregar.setText("Agregar");
-        jButtonNuevoEventoAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNuevoEventoAgregarActionPerformed(evt);
-            }
-        });
-
         dateChooserComboFecha.setCurrentView(new datechooser.view.appearance.AppearancesList("Swing",
             new datechooser.view.appearance.ViewAppearance("custom",
                 new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
-                    new java.awt.Color(187, 187, 187),
+                    new java.awt.Color(222, 222, 222),
                     new java.awt.Color(0, 0, 255),
                     false,
                     true,
                     new datechooser.view.appearance.swing.ButtonPainter()),
                 new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
-                    new java.awt.Color(187, 187, 187),
+                    new java.awt.Color(222, 222, 222),
                     new java.awt.Color(0, 0, 255),
                     true,
                     true,
@@ -290,13 +283,13 @@ public class EventoFrame extends javax.swing.JDialog {
                     true,
                     new datechooser.view.appearance.swing.LabelPainter()),
                 new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
-                    new java.awt.Color(187, 187, 187),
+                    new java.awt.Color(222, 222, 222),
                     new java.awt.Color(0, 0, 255),
                     false,
                     true,
                     new datechooser.view.appearance.swing.LabelPainter()),
                 new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
-                    new java.awt.Color(187, 187, 187),
+                    new java.awt.Color(222, 222, 222),
                     new java.awt.Color(255, 0, 0),
                     false,
                     false,
@@ -309,6 +302,13 @@ public class EventoFrame extends javax.swing.JDialog {
     dateChooserComboFecha.setNothingAllowed(false);
     dateChooserComboFecha.setFormat(0);
     dateChooserComboFecha.setLocale(new java.util.Locale("es", "CL", ""));
+
+    jButtonNuevoEventoAgregar.setText("Agregar");
+    jButtonNuevoEventoAgregar.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButtonNuevoEventoAgregarActionPerformed(evt);
+        }
+    });
 
     javax.swing.GroupLayout jPanelContenidoEventoNuevoLayout = new javax.swing.GroupLayout(jPanelContenidoEventoNuevo);
     jPanelContenidoEventoNuevo.setLayout(jPanelContenidoEventoNuevoLayout);

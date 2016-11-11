@@ -26,5 +26,10 @@ public class ImplEventoDAO implements IEventoDAO{
             throw new IllegalArgumentException(e.getMessage());
         }
     }
+
+    @Override
+    public void ModificarEvento(Evento evento) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

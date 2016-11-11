@@ -8,8 +8,10 @@ package GUI.Organizador;
 import DTO.*;
 import java.util.ArrayList;
 import javax.swing.JTable;
-import Util.jTableModels.jTableModelEvento;
+import Util.jTableCustom.Models.jTableModelEvento;
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 /**
  *
  * @author Agustin
@@ -22,28 +24,24 @@ public class MainFrame extends javax.swing.JFrame {
     private DTO.Usuario usuario;
     private DTO.Organizacion organizacion;
     private ArrayList<Evento> eventos;
+    private jTableModelEvento tableModel = new Util.jTableCustom.Models.jTableModelEvento();
     
     public MainFrame() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-                
+   
     public void CargarDatos(DTO.Usuario usuario){
         this.usuario = usuario;
         this.jLabelNombreUsuario.setText(this.usuario.getNombre());
         this.organizacion = new DAO.ImplOrganizacionDAO().RecuperarOrganizacion_RUN(this.usuario);
         this.jLabelNombreOrganizacion.setText(this.organizacion.getNombre());
+        this.tableModel.assignTable(this.jTableEventos);
         this.refrescarEventos();
     }
     
     public void refrescarEventos(){
-        ((Util.jTableModels.jTableModelEvento)jTableEventos.getModel()).removerDatos();
-        
-        this.eventos = new DAO.ImplOrganizacionDAO().RecuperarEventos(organizacion);
-        eventos.forEach((evento) -> {
-            ((Util.jTableModels.jTableModelEvento)jTableEventos.getModel()).cargarDatos(evento);
-        });
-        ((Util.jTableModels.jTableModelEvento)this.jTableEventos.getModel()).isCellEditable(0, 0);
+        this.tableModel.refrescarEventos(eventos, organizacion);
     }
     
     /**
@@ -74,17 +72,18 @@ public class MainFrame extends javax.swing.JFrame {
         jLabelMensajeBienvenida.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelMensajeBienvenida.setText("Bienvenido");
 
-        jLabelNombreUsuario.setText("Usuario");
+        jLabelNombreUsuario.setText("{Usuario}");
 
         javax.swing.GroupLayout jPanelDespliegueDatosLayout = new javax.swing.GroupLayout(jPanelDespliegueDatos);
         jPanelDespliegueDatos.setLayout(jPanelDespliegueDatosLayout);
         jPanelDespliegueDatosLayout.setHorizontalGroup(
             jPanelDespliegueDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDespliegueDatosLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabelMensajeBienvenida)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelNombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 753, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelDespliegueDatosLayout.setVerticalGroup(
             jPanelDespliegueDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,7 +92,15 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jLabelNombreUsuario))
         );
 
-        jTableEventos.setModel(new Util.jTableModels.jTableModelEvento());
+        jTableEventos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jTableEventos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPaneEventos.setViewportView(jTableEventos);
 
         jLabelTitulo.setText("Administrar Eventos de:");
@@ -112,7 +119,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabelNombreOrganizacion.setText("[Organización]");
+        jLabelNombreOrganizacion.setText("{Organización}");
 
         javax.swing.GroupLayout jPanelContenidoLayout = new javax.swing.GroupLayout(jPanelContenido);
         jPanelContenido.setLayout(jPanelContenidoLayout);
@@ -121,31 +128,33 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jPanelContenidoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPaneEventos, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelContenidoLayout.createSequentialGroup()
-                        .addComponent(jLabelTitulo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelNombreOrganizacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonNuevoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPaneEventos)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelContenidoLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonEliminarEvento)))
+                        .addGroup(jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelContenidoLayout.createSequentialGroup()
+                                .addComponent(jLabelTitulo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelNombreOrganizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonNuevoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButtonEliminarEvento, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         jPanelContenidoLayout.setVerticalGroup(
             jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelContenidoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelTitulo)
-                    .addComponent(jButtonNuevoEvento)
-                    .addComponent(jLabelNombreOrganizacion))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPaneEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonNuevoEvento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabelTitulo)
+                        .addComponent(jLabelNombreOrganizacion)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPaneEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonEliminarEvento)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -156,8 +165,10 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelDespliegueDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSeparatorDespliegueContenido)
-                    .addComponent(jPanelContenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanelContenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jSeparatorDespliegueContenido)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
