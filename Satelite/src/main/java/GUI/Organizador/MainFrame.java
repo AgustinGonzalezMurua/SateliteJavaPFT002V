@@ -125,6 +125,11 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarActionPerformed(evt);
+            }
+        });
 
         jButtonNuevoEvento.setText("Nuevo");
         jButtonNuevoEvento.addActionListener(new java.awt.event.ActionListener() {
@@ -219,10 +224,13 @@ public class MainFrame extends javax.swing.JFrame {
         try {
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Está seguro de querer eliminar el evento seleccionado?");
             if(respuesta == JOptionPane.YES_OPTION){
-                DTO.Evento _evento = new Evento();
-                _evento.setCodigo(Integer.parseInt((jTableEventos.getValueAt(jTableEventos.getSelectedRow(), 0)).toString()));
-                new DAO.ImplEventoDAO().EliminarEvento(_evento);
-
+                for (Evento _evento:  eventos) {
+                    if (_evento.getCodigo() == Integer.parseInt((jTableEventos.getValueAt(jTableEventos.getSelectedRow(), 0)))) {
+                        new DAO.ImplEventoDAO().EliminarEvento(_evento);
+                        break;
+                    }
+                }
+                
                 JOptionPane.showMessageDialog(this, "Evento eliminado exitosamente", "Alerta", JOptionPane.INFORMATION_MESSAGE);
 
                 this.refrescarEventos();
@@ -230,6 +238,10 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButtonEliminarEventoActionPerformed
+
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonModificarActionPerformed
 
     /**
      * @param args the command line arguments

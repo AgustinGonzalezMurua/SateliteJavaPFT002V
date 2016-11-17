@@ -79,14 +79,4 @@ public class jTableModelEvento extends DefaultTableModel{
         
         this.isCellEditable(0, 0);
     }
-    
-    public void ModificarEvento(int i){
-        try{
-            Evento evento =  this.Eventos.get(i);
-            new DAO.ImplEventoDAO().ModificarEvento(evento);
-            this.refrescarEventos(Eventos, Organizacion);
-        }catch (Exception ex){
-            throw new IllegalArgumentException(ex.getMessage());
-        }
-    }
 }

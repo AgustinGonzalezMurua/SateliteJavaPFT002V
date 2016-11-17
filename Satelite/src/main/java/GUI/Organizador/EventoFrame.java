@@ -18,10 +18,10 @@ import javax.swing.JOptionPane;
  */
 public class EventoFrame extends javax.swing.JDialog {
 
-    private DTO.Evento evento = new DTO.Evento();
+    private DTO.Evento evento;
     private ArrayList<TipoGeneric> tipoEventos = new DAO.ImplTipoGenericsDAO().RecuperarTipoEventos();
     private ArrayList<Recinto> recintos = new DAO.ImplRecintoDAO().RecuperarRecinto_Todos();
-        
+
     /** Creates new form NuevoEvento */
     public EventoFrame(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -49,6 +49,11 @@ public class EventoFrame extends javax.swing.JDialog {
     
     public void CargarDatos(DTO.Organizacion organizacion, DTO.Evento evento){
         this.evento = evento;
+        this.jButtonNuevoEventoAgregar.setText("Modificar");
+        this.jTextFieldNuevoEventoNombre.setText(this.evento.getNombre());
+        this.jTextFieldNuevoEventoRecinto.setText(this.evento.getRecinto().getNombre());
+        this.jTextFieldNuevoEventoNombre.setText(this.evento.getNombre());
+        this.jTextFieldNuevoEventoNombre.setText(this.evento.getNombre());
         this.CargarDatos(organizacion);
     }
 
@@ -423,23 +428,45 @@ public class EventoFrame extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonNuevoEventoTipoActionPerformed
 
     private void jButtonNuevoEventoAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoEventoAgregarActionPerformed
-        try {
-            this.evento.setNombre(jTextFieldNuevoEventoNombre.getText());
-            this.evento.setFecha(this.dateChooserComboFecha.getSelectedDate().getTime());
-            this.evento.getFecha().set(Calendar.HOUR, (int)jSpinnerHora.getValue());
-            this.evento.getFecha().set(Calendar.MINUTE, (int)jSpinnerMinutos.getValue());
-            new DAO.ImplEventoDAO().AgregarNuevoEvento(evento);
-            JOptionPane.showMessageDialog(this,
-                "Evento agregado exitosamente",
-                "Agregado",
-                JOptionPane.PLAIN_MESSAGE);
-            ((GUI.Organizador.MainFrame)this.getParent()).refrescarEventos();
-            this.dispose();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,
-                "Ha ocurrido un error: \n" +  e.getMessage(),
-                "Error",
-                JOptionPane.ERROR_MESSAGE);
+        if (this.evento == null) {
+            try {
+                this.evento = new DTO.Evento();
+                this.evento.setNombre(jTextFieldNuevoEventoNombre.getText());
+                this.evento.setFecha(this.dateChooserComboFecha.getSelectedDate().getTime());
+                this.evento.getFecha().set(Calendar.HOUR, (int)jSpinnerHora.getValue());
+                this.evento.getFecha().set(Calendar.MINUTE, (int)jSpinnerMinutos.getValue());
+                new DAO.ImplEventoDAO().AgregarNuevoEvento(evento);
+                JOptionPane.showMessageDialog(this,
+                    "Evento agregado exitosamente",
+                    "Agregado",
+                    JOptionPane.PLAIN_MESSAGE);
+                ((GUI.Organizador.MainFrame)this.getParent()).refrescarEventos();
+                this.dispose();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,
+                    "Ha ocurrido un error: \n" +  e.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            try {
+                this.evento.setNombre(jTextFieldNuevoEventoNombre.getText());
+                this.evento.setFecha(this.dateChooserComboFecha.getSelectedDate().getTime());
+                this.evento.getFecha().set(Calendar.HOUR, (int)jSpinnerHora.getValue());
+                this.evento.getFecha().set(Calendar.MINUTE, (int)jSpinnerMinutos.getValue());
+                new DAO.ImplEventoDAO().ModificarEvento(evento);
+                JOptionPane.showMessageDialog(this,
+                    "Evento modificado exitosamente",
+                    "Modificado",
+                    JOptionPane.PLAIN_MESSAGE);
+                ((GUI.Organizador.MainFrame)this.getParent()).refrescarEventos();
+                this.dispose();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,
+                    "Ha ocurrido un error: \n" +  e.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_jButtonNuevoEventoAgregarActionPerformed
 
