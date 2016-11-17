@@ -30,6 +30,7 @@ public class Evento {
     public DateFormat  sdt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
     
     public Evento() {
+        this.Codigo = -1;
         this.Fecha = Calendar.getInstance();
     }
 

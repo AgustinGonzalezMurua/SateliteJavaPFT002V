@@ -26,6 +26,7 @@ public class jTableModelRecinto extends DefaultTableModel{
     }
     
     private void setColummns(){
+        this.addColumn("Codigo");
         this.addColumn("Nombre");
         this.addColumn("Dirección");
         this.addColumn("Comuna");
@@ -35,7 +36,8 @@ public class jTableModelRecinto extends DefaultTableModel{
     
     public void cargarDatos(DTO.Recinto recinto) {
         super.addRow(new Object[]{
-            recinto.getNombre()
+            recinto.getCodigo()
+            ,recinto.getNombre()
             ,recinto.getDireccion()
             ,recinto.getComuna().getNombre()
             ,recinto.getCapacidadMaxima()

@@ -29,7 +29,14 @@ public class ImplEventoDAO implements IEventoDAO{
 
     @Override
     public void ModificarEvento(Evento evento) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            JSONObject _resultado = (JSONObject)JSONPARSER.parse(SERVICIO.modificarEvento(evento.toJSONString()));
+            if (_resultado.containsKey("Error")) {
+                throw new ServiceError("Ha ocurrido un error: " + _resultado.get("Error").toString())   ;
+            }
+        } catch (Exception e) {
+            throw new IllegalArgumentException(e.getMessage());
+        }
     }
 
     @Override

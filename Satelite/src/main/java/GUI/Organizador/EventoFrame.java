@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class EventoFrame extends javax.swing.JDialog {
 
-    private DTO.Evento evento;
+    private DTO.Evento evento = new DTO.Evento();
     private ArrayList<TipoGeneric> tipoEventos = new DAO.ImplTipoGenericsDAO().RecuperarTipoEventos();
     private ArrayList<Recinto> recintos = new DAO.ImplRecintoDAO().RecuperarRecinto_Todos();
 
@@ -37,23 +37,50 @@ public class EventoFrame extends javax.swing.JDialog {
         this.jDialogTipoEvento.pack();
         this.jDialogRecintos.pack();
         
-        this.jListTiposEventos.setModel(new Util.jListModelTipoGenerics(tipoEventos));
+        this.jListTiposEventos.setModel(new Util.jListModelTipoGenerics(this.tipoEventos));
         recintos.forEach((recinto) ->{
             ((Util.jTableCustom.Models.jTableModelRecinto)jTableRecintos.getModel()).cargarDatos(recinto);
         });
     }
      
+    /**
+     * Para eventos nuevos
+     * @param organizacion 
+     */
     public void CargarDatos(DTO.Organizacion organizacion){
         this.evento.setOrganizacion(organizacion);
     }
     
+    
+    /**
+     * Para Eventos ya existentes
+     * @param organizacion
+     * @param evento 
+     */
     public void CargarDatos(DTO.Organizacion organizacion, DTO.Evento evento){
         this.evento = evento;
         this.jButtonNuevoEventoAgregar.setText("Modificar");
+        this.setTitle("Modificar " + this.evento.getNombre() );
         this.jTextFieldNuevoEventoNombre.setText(this.evento.getNombre());
         this.jTextFieldNuevoEventoRecinto.setText(this.evento.getRecinto().getNombre());
+        this.jSpinnerHora.setValue(this.evento.getFecha().get(Calendar.HOUR_OF_DAY));
+        this.jSpinnerMinutos.setValue(this.evento.getFecha().get(Calendar.MINUTE));
+        this.jTextFieldNuevoEventoTipo.setText(this.evento.getTipo().getDescripcion());
         this.jTextFieldNuevoEventoNombre.setText(this.evento.getNombre());
-        this.jTextFieldNuevoEventoNombre.setText(this.evento.getNombre());
+        
+        tipoEventos.forEach((tipo)->{
+            if (tipo.getCodigo() == this.evento.getTipo().getCodigo()) {
+                jListTiposEventos.setSelectedIndex(this.tipoEventos.indexOf(tipo));
+            }
+        });
+        
+        recintos.forEach((recinto) -> {
+            if (recinto.getCodigo() == this.evento.getRecinto().getCodigo()) {
+                jTableRecintos.setRowSelectionInterval(recintos.indexOf(recinto), recintos.indexOf(recinto));
+            }
+        });
+        
+        
         this.CargarDatos(organizacion);
     }
 
@@ -124,7 +151,7 @@ public class EventoFrame extends javax.swing.JDialog {
                 .addGroup(jPanelContenidoTipoEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelContenidoTipoEventoLayout.createSequentialGroup()
                         .addComponent(jButtonTipoEventoListo, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 3, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanelContenidoTipoEventoLayout.createSequentialGroup()
                         .addGroup(jPanelContenidoTipoEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelContenidoTipoEventoLayout.createSequentialGroup()
@@ -325,7 +352,7 @@ public class EventoFrame extends javax.swing.JDialog {
     jLabelNuevoEventoHoraSeparador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     jLabelNuevoEventoHoraSeparador.setText(":");
 
-    jButtonNuevoEventoAgregar.setText("Agregar");
+    jButtonNuevoEventoAgregar.setText("Nuevo");
     jButtonNuevoEventoAgregar.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jButtonNuevoEventoAgregarActionPerformed(evt);
@@ -365,7 +392,7 @@ public class EventoFrame extends javax.swing.JDialog {
                     .addComponent(jLabelNuevoEventoHoraSeparador, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jSpinnerMinutos, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
                     .addComponent(jButtonNuevoEventoAgregar)))
             .addContainerGap())
     );
@@ -428,45 +455,39 @@ public class EventoFrame extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonNuevoEventoTipoActionPerformed
 
     private void jButtonNuevoEventoAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoEventoAgregarActionPerformed
-        if (this.evento == null) {
-            try {
-                this.evento = new DTO.Evento();
-                this.evento.setNombre(jTextFieldNuevoEventoNombre.getText());
-                this.evento.setFecha(this.dateChooserComboFecha.getSelectedDate().getTime());
-                this.evento.getFecha().set(Calendar.HOUR, (int)jSpinnerHora.getValue());
-                this.evento.getFecha().set(Calendar.MINUTE, (int)jSpinnerMinutos.getValue());
+
+        try{
+            this.evento.setNombre(jTextFieldNuevoEventoNombre.getText());
+            this.evento.setFecha(this.dateChooserComboFecha.getSelectedDate().getTime());
+            this.evento.getFecha().set(Calendar.HOUR_OF_DAY, (int)jSpinnerHora.getValue());
+            this.evento.getFecha().set(Calendar.MINUTE, (int)jSpinnerMinutos.getValue());
+            this.evento.getFecha().set(Calendar.SECOND, 0);
+            
+            //Si es nuevo Evento
+            if (this.evento.getCodigo() < 0) {
                 new DAO.ImplEventoDAO().AgregarNuevoEvento(evento);
                 JOptionPane.showMessageDialog(this,
                     "Evento agregado exitosamente",
                     "Agregado",
                     JOptionPane.PLAIN_MESSAGE);
-                ((GUI.Organizador.MainFrame)this.getParent()).refrescarEventos();
-                this.dispose();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this,
-                    "Ha ocurrido un error: \n" +  e.getMessage(),
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
-            }
-        }else{
-            try {
-                this.evento.setNombre(jTextFieldNuevoEventoNombre.getText());
-                this.evento.setFecha(this.dateChooserComboFecha.getSelectedDate().getTime());
-                this.evento.getFecha().set(Calendar.HOUR, (int)jSpinnerHora.getValue());
-                this.evento.getFecha().set(Calendar.MINUTE, (int)jSpinnerMinutos.getValue());
+            }else{
+            //Si es evento existente
                 new DAO.ImplEventoDAO().ModificarEvento(evento);
                 JOptionPane.showMessageDialog(this,
                     "Evento modificado exitosamente",
                     "Modificado",
                     JOptionPane.PLAIN_MESSAGE);
                 ((GUI.Organizador.MainFrame)this.getParent()).refrescarEventos();
-                this.dispose();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this,
-                    "Ha ocurrido un error: \n" +  e.getMessage(),
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
             }
+            
+            ((GUI.Organizador.MainFrame)this.getParent()).refrescarEventos();
+            this.dispose();
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this,
+                "Ha ocurrido un error: \n" +  e.getMessage(),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonNuevoEventoAgregarActionPerformed
 
@@ -478,7 +499,7 @@ public class EventoFrame extends javax.swing.JDialog {
 
     private void jButtonListoRecintosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListoRecintosActionPerformed
         this.jTextFieldNuevoEventoRecinto.setText(
-                jTableRecintos.getValueAt(jTableRecintos.getSelectedRow(), 0).toString()
+                jTableRecintos.getValueAt(jTableRecintos.getSelectedRow(), 1).toString()
         );
         this.evento.setRecinto(recintos.get(jTableRecintos.getSelectedRow()));
         this.jDialogRecintos.setVisible(false);

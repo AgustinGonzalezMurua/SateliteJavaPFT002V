@@ -42,7 +42,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jButtonTipoEventoListo" min="-2" pref="278" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="3" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -310,7 +310,7 @@
                           <Component id="jLabelNuevoEventoHoraSeparador" min="-2" pref="5" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jSpinnerMinutos" min="-2" pref="60" max="-2" attributes="0"/>
-                          <EmptySpace pref="99" max="32767" attributes="0"/>
+                          <EmptySpace pref="108" max="32767" attributes="0"/>
                           <Component id="jButtonNuevoEventoAgregar" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -453,7 +453,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonNuevoEventoAgregar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Agregar"/>
+            <Property name="text" type="java.lang.String" value="Nuevo"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonNuevoEventoAgregarActionPerformed"/>

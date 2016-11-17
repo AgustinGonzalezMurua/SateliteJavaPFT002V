@@ -42,7 +42,11 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     public void refrescarEventos(){
-        this.tableModel.refrescarEventos(eventos, organizacion);
+        this.eventos = this.tableModel.refrescarEventos(eventos, organizacion);
+        
+        boolean existenEventos = jTableEventos.getRowCount() != 0;
+        this.jButtonEliminarEvento.setEnabled(existenEventos);
+        this.jButtonModificar.setEnabled(existenEventos);
     }
     
     /**
@@ -217,6 +221,7 @@ public class MainFrame extends javax.swing.JFrame {
             nuevo.CargarDatos(organizacion);
             nuevo.setVisible(true);
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonNuevoEventoActionPerformed
 
@@ -236,11 +241,26 @@ public class MainFrame extends javax.swing.JFrame {
                 this.refrescarEventos();
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocurrió un error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonEliminarEventoActionPerformed
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
-        // TODO add your handling code here:
+        try {
+            
+            EventoFrame nuevo = new EventoFrame(this, true);
+            
+            for (Evento _evento:  this.eventos) {
+                if (_evento.getCodigo() == Integer.parseInt((jTableEventos.getValueAt(jTableEventos.getSelectedRow(), 0)).toString())) {
+                    nuevo.CargarDatos(organizacion, _evento);
+                    break;
+                }
+            }
+            nuevo.setVisible(true);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonModificarActionPerformed
 
     /**

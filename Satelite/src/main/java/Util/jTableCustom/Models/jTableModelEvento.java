@@ -17,9 +17,6 @@ import javax.swing.table.DefaultTableModel;
  * @author Agus
  */
 public class jTableModelEvento extends DefaultTableModel{
-
-    private ArrayList<Evento> Eventos;
-    private Organizacion Organizacion;
     
     public jTableModelEvento() {
         this.addColumn("Codigo");
@@ -66,11 +63,9 @@ public class jTableModelEvento extends DefaultTableModel{
         jTableEventos.setModel(this);
     }
     
-    public void refrescarEventos(ArrayList<Evento> eventos, Organizacion organizacion){
+    public ArrayList<Evento> refrescarEventos(ArrayList<Evento> eventos, Organizacion organizacion){
         eventos = new DAO.ImplOrganizacionDAO().RecuperarEventos(organizacion);
-        
-        this.Eventos = eventos;
-        this.Organizacion = organizacion;
+
         this.removerDatos();
         
         eventos.forEach((evento) -> {
@@ -78,5 +73,7 @@ public class jTableModelEvento extends DefaultTableModel{
         });
         
         this.isCellEditable(0, 0);
+        
+        return eventos;
     }
 }
