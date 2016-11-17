@@ -9,6 +9,7 @@ import DTO.*;
 import java.util.ArrayList;
 import javax.swing.JTable;
 import Util.jTableCustom.Models.jTableModelEvento;
+import javax.swing.JOptionPane;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -61,13 +62,15 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPaneEventos = new javax.swing.JScrollPane();
         jTableEventos = new javax.swing.JTable();
         jLabelTitulo = new javax.swing.JLabel();
-        jButtonEliminarEvento = new javax.swing.JButton();
-        jButtonNuevoEvento = new javax.swing.JButton();
         jLabelNombreOrganizacion = new javax.swing.JLabel();
+        jButtonEliminarEvento = new javax.swing.JButton();
+        jButtonRefrescar = new javax.swing.JButton();
+        jButtonModificar = new javax.swing.JButton();
+        jButtonNuevoEvento = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("E-Ticket Administración");
-        setResizable(false);
+        setSize(new java.awt.Dimension(0, 0));
 
         jLabelMensajeBienvenida.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelMensajeBienvenida.setText("Bienvenido");
@@ -82,8 +85,8 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabelMensajeBienvenida)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 753, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabelNombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE)
+                .addGap(33, 33, 33))
         );
         jPanelDespliegueDatosLayout.setVerticalGroup(
             jPanelDespliegueDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,6 +108,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabelTitulo.setText("Administrar Eventos de:");
 
+        jLabelNombreOrganizacion.setText("{Organización}");
+
         jButtonEliminarEvento.setText("Eliminar");
         jButtonEliminarEvento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,14 +117,21 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        jButtonRefrescar.setText("Refrescar");
+        jButtonRefrescar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRefrescarActionPerformed(evt);
+            }
+        });
+
+        jButtonModificar.setText("Modificar");
+
         jButtonNuevoEvento.setText("Nuevo");
         jButtonNuevoEvento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonNuevoEventoActionPerformed(evt);
             }
         });
-
-        jLabelNombreOrganizacion.setText("{Organización}");
 
         javax.swing.GroupLayout jPanelContenidoLayout = new javax.swing.GroupLayout(jPanelContenido);
         jPanelContenido.setLayout(jPanelContenidoLayout);
@@ -129,16 +141,18 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPaneEventos)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelContenidoLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelContenidoLayout.createSequentialGroup()
-                                .addComponent(jLabelTitulo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelNombreOrganizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonNuevoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButtonEliminarEvento, javax.swing.GroupLayout.Alignment.TRAILING))))
+                    .addGroup(jPanelContenidoLayout.createSequentialGroup()
+                        .addComponent(jLabelTitulo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelNombreOrganizacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonRefrescar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonEliminarEvento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonModificar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonNuevoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanelContenidoLayout.setVerticalGroup(
@@ -146,15 +160,17 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jPanelContenidoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonNuevoEvento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonNuevoEvento)
+                        .addComponent(jButtonModificar))
                     .addGroup(jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabelTitulo)
-                        .addComponent(jLabelNombreOrganizacion)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPaneEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonEliminarEvento)
-                .addContainerGap())
+                        .addComponent(jLabelNombreOrganizacion)
+                        .addComponent(jButtonRefrescar)
+                        .addComponent(jButtonEliminarEvento)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPaneEventos, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                .addGap(28, 28, 28))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -179,16 +195,16 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparatorDespliegueContenido, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelContenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanelContenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonEliminarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarEventoActionPerformed
+    private void jButtonRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefrescarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonEliminarEventoActionPerformed
+    }//GEN-LAST:event_jButtonRefrescarActionPerformed
 
     private void jButtonNuevoEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoEventoActionPerformed
         try {
@@ -198,6 +214,22 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButtonNuevoEventoActionPerformed
+
+    private void jButtonEliminarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarEventoActionPerformed
+        try {
+            int respuesta = JOptionPane.showConfirmDialog(this, "¿Está seguro de querer eliminar el evento seleccionado?");
+            if(respuesta == JOptionPane.YES_OPTION){
+                DTO.Evento _evento = new Evento();
+                _evento.setCodigo(Integer.parseInt((jTableEventos.getValueAt(jTableEventos.getSelectedRow(), 0)).toString()));
+                new DAO.ImplEventoDAO().EliminarEvento(_evento);
+
+                JOptionPane.showMessageDialog(this, "Evento eliminado exitosamente", "Alerta", JOptionPane.INFORMATION_MESSAGE);
+
+                this.refrescarEventos();
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jButtonEliminarEventoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,7 +268,9 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonEliminarEvento;
+    private javax.swing.JButton jButtonModificar;
     private javax.swing.JButton jButtonNuevoEvento;
+    private javax.swing.JButton jButtonRefrescar;
     private javax.swing.JLabel jLabelMensajeBienvenida;
     private javax.swing.JLabel jLabelNombreOrganizacion;
     private javax.swing.JLabel jLabelNombreUsuario;

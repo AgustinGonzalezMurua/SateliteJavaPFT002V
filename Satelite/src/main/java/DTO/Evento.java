@@ -5,7 +5,9 @@
  */
 package DTO;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -18,23 +20,25 @@ import org.json.simple.parser.ParseException;
 public class Evento {
     private int Codigo;
     private String Nombre;
-    private Date Fecha;
+    private Calendar Fecha;
     private Date FechaCreacion;
     private TipoGeneric Tipo;
     private Recinto Recinto;
     private Organizacion Organizacion;
     private boolean Estado;
 
-    public SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+    public DateFormat  sdt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
     
     public Evento() {
+        this.Fecha = Calendar.getInstance();
     }
 
     public Evento(JSONObject json) throws ParseException, java.text.ParseException {
         
         this.Codigo         = Integer.parseInt(json.get("Codigo").toString());
         this.Nombre         = json.get("Nombre").toString();
-        this.Fecha          = sdt.parse(json.get("Fecha").toString());
+        this.Fecha          = Calendar.getInstance();
+        this.Fecha.setTime(sdt.parse(json.get("Fecha").toString()));
         this.FechaCreacion  = sdt.parse(json.get("FechaCreacion").toString());
         this.Tipo           = new TipoGeneric((JSONObject) new JSONParser().parse(json.get("Tipo").toString()));
         this.Recinto        = new Recinto((JSONObject) new JSONParser().parse(json.get("Recinto").toString()));
@@ -50,12 +54,16 @@ public class Evento {
         this.Nombre = Nombre;
     }
 
-    public Date getFecha() {
+    public Calendar getFecha() {
         return Fecha;
     }
 
-    public void setFecha(Date Fecha) {
+    public void setFecha(Calendar Fecha) {
         this.Fecha = Fecha;
+    }
+    
+    public void setFecha(Date Fecha) {
+        this.Fecha.setTime(Fecha);
     }
 
     public String fechaToString(){
@@ -115,7 +123,7 @@ public class Evento {
     public int getCodigo() {
         return Codigo;
     }
-
+    
     public void setCodigo(int Codigo) {
         this.Codigo = Codigo;
     }

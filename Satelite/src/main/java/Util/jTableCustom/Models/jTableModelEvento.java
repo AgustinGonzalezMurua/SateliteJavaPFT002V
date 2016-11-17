@@ -36,7 +36,7 @@ public class jTableModelEvento extends DefaultTableModel{
         super.addRow(new Object[]{
             evento.getCodigo()
             ,evento.getNombre()
-            ,sdt.format(evento.getFecha())
+            ,sdt.format(evento.getFecha().getTime())
             ,sdt.format(evento.getFechaCreacion())
             ,evento.getTipo().getDescripcion()
             ,evento.getRecinto().getNombre()
