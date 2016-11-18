@@ -20,7 +20,7 @@ public class ImplEventoDAO implements IEventoDAO{
         try {
             JSONObject _resultado = (JSONObject)JSONPARSER.parse(SERVICIO.registrarEvento(evento.toJSONString()));
             if (_resultado.containsKey("Error")) {
-                throw new ServiceError("Ha ocurrido un error: " + _resultado.get("Error").toString());
+                throw new ServiceError(_resultado.get("Error").toString());
             }
         } catch (Exception e) {
             throw new IllegalArgumentException(e.getMessage());
@@ -32,7 +32,7 @@ public class ImplEventoDAO implements IEventoDAO{
         try {
             JSONObject _resultado = (JSONObject)JSONPARSER.parse(SERVICIO.modificarEvento(evento.toJSONString()));
             if (_resultado.containsKey("Error")) {
-                throw new ServiceError("Ha ocurrido un error: " + _resultado.get("Error").toString())   ;
+                throw new ServiceError(_resultado.get("Error").toString())   ;
             }
         } catch (Exception e) {
             throw new IllegalArgumentException(e.getMessage());
@@ -44,7 +44,7 @@ public class ImplEventoDAO implements IEventoDAO{
         try{
             JSONObject _resultado = (JSONObject)JSONPARSER.parse(SERVICIO.eliminarEvento(String.valueOf(evento.getCodigo())));
             if (ContieneErrores(_resultado)) {
-                throw new ServiceError("Ha ocurrido un error al eliminar el evento:" + _resultado.get("Error").toString());
+                throw new ServiceError(_resultado.get("Error").toString());
             }
         } catch (Exception e){
             throw new IllegalArgumentException(e.getMessage());
@@ -54,7 +54,7 @@ public class ImplEventoDAO implements IEventoDAO{
         private boolean ContieneErrores(Object obj) throws ServiceError{
         if (obj instanceof JSONObject) {
                 if (((JSONObject)obj).containsKey("Error")) {
-                    throw new ServiceError("Ha ocurrido un error: " + ((JSONObject)obj).get("Error").toString());
+                    throw new ServiceError(((JSONObject)obj).get("Error").toString());
                 }else{
                     return false;
                 }

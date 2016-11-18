@@ -230,7 +230,7 @@ public class MainFrame extends javax.swing.JFrame {
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Está seguro de querer eliminar el evento seleccionado?");
             if(respuesta == JOptionPane.YES_OPTION){
                 for (Evento _evento:  eventos) {
-                    if (_evento.getCodigo() == Integer.parseInt((jTableEventos.getValueAt(jTableEventos.getSelectedRow(), 0)))) {
+                    if (_evento.getCodigo() == Integer.parseInt((jTableEventos.getValueAt(jTableEventos.getSelectedRow(), 0)).toString())) {
                         new DAO.ImplEventoDAO().EliminarEvento(_evento);
                         break;
                     }
