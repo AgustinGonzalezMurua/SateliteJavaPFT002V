@@ -8,8 +8,11 @@ package GUI.Organizador;
 import DTO.*;
 import java.util.ArrayList;
 import javax.swing.JTable;
-import Util.jTableModels.jTableModelEvento;
+import Util.jTableCustom.Models.jTableModelEvento;
+import javax.swing.JOptionPane;
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 /**
  *
  * @author Agustin
@@ -22,28 +25,28 @@ public class MainFrame extends javax.swing.JFrame {
     private DTO.Usuario usuario;
     private DTO.Organizacion organizacion;
     private ArrayList<Evento> eventos;
+    private jTableModelEvento tableModel = new Util.jTableCustom.Models.jTableModelEvento();
     
     public MainFrame() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-                
+   
     public void CargarDatos(DTO.Usuario usuario){
         this.usuario = usuario;
         this.jLabelNombreUsuario.setText(this.usuario.getNombre());
         this.organizacion = new DAO.ImplOrganizacionDAO().RecuperarOrganizacion_RUN(this.usuario);
         this.jLabelNombreOrganizacion.setText(this.organizacion.getNombre());
+        this.tableModel.assignTable(this.jTableEventos);
         this.refrescarEventos();
     }
     
     public void refrescarEventos(){
-        ((Util.jTableModels.jTableModelEvento)jTableEventos.getModel()).removerDatos();
+        this.eventos = this.tableModel.refrescarEventos(eventos, organizacion);
         
-        this.eventos = new DAO.ImplOrganizacionDAO().RecuperarEventos(organizacion);
-        eventos.forEach((evento) -> {
-            ((Util.jTableModels.jTableModelEvento)jTableEventos.getModel()).cargarDatos(evento);
-        });
-        ((Util.jTableModels.jTableModelEvento)this.jTableEventos.getModel()).isCellEditable(0, 0);
+        boolean existenEventos = jTableEventos.getRowCount() != 0;
+        this.jButtonEliminarEvento.setEnabled(existenEventos);
+        this.jButtonModificar.setEnabled(existenEventos);
     }
     
     /**
@@ -63,28 +66,31 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPaneEventos = new javax.swing.JScrollPane();
         jTableEventos = new javax.swing.JTable();
         jLabelTitulo = new javax.swing.JLabel();
-        jButtonEliminarEvento = new javax.swing.JButton();
-        jButtonNuevoEvento = new javax.swing.JButton();
         jLabelNombreOrganizacion = new javax.swing.JLabel();
+        jButtonEliminarEvento = new javax.swing.JButton();
+        jButtonRefrescar = new javax.swing.JButton();
+        jButtonModificar = new javax.swing.JButton();
+        jButtonNuevoEvento = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("E-Ticket Administración");
-        setResizable(false);
+        setSize(new java.awt.Dimension(0, 0));
 
         jLabelMensajeBienvenida.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelMensajeBienvenida.setText("Bienvenido");
 
-        jLabelNombreUsuario.setText("Usuario");
+        jLabelNombreUsuario.setText("{Usuario}");
 
         javax.swing.GroupLayout jPanelDespliegueDatosLayout = new javax.swing.GroupLayout(jPanelDespliegueDatos);
         jPanelDespliegueDatos.setLayout(jPanelDespliegueDatosLayout);
         jPanelDespliegueDatosLayout.setHorizontalGroup(
             jPanelDespliegueDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDespliegueDatosLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabelMensajeBienvenida)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelNombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelNombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE)
+                .addGap(33, 33, 33))
         );
         jPanelDespliegueDatosLayout.setVerticalGroup(
             jPanelDespliegueDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,15 +99,39 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jLabelNombreUsuario))
         );
 
-        jTableEventos.setModel(new Util.jTableModels.jTableModelEvento());
+        jTableEventos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jTableEventos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPaneEventos.setViewportView(jTableEventos);
 
         jLabelTitulo.setText("Administrar Eventos de:");
+
+        jLabelNombreOrganizacion.setText("{Organización}");
 
         jButtonEliminarEvento.setText("Eliminar");
         jButtonEliminarEvento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonEliminarEventoActionPerformed(evt);
+            }
+        });
+
+        jButtonRefrescar.setText("Refrescar");
+        jButtonRefrescar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRefrescarActionPerformed(evt);
+            }
+        });
+
+        jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarActionPerformed(evt);
             }
         });
 
@@ -112,8 +142,6 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabelNombreOrganizacion.setText("[Organización]");
-
         javax.swing.GroupLayout jPanelContenidoLayout = new javax.swing.GroupLayout(jPanelContenido);
         jPanelContenido.setLayout(jPanelContenidoLayout);
         jPanelContenidoLayout.setHorizontalGroup(
@@ -121,31 +149,37 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jPanelContenidoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPaneEventos, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelContenidoLayout.createSequentialGroup()
+                    .addComponent(jScrollPaneEventos)
+                    .addGroup(jPanelContenidoLayout.createSequentialGroup()
                         .addComponent(jLabelTitulo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelNombreOrganizacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonNuevoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelContenidoLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonEliminarEvento)))
+                        .addComponent(jButtonRefrescar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonEliminarEvento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonModificar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonNuevoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanelContenidoLayout.setVerticalGroup(
             jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelContenidoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelTitulo)
-                    .addComponent(jButtonNuevoEvento)
-                    .addComponent(jLabelNombreOrganizacion))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPaneEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonEliminarEvento)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonNuevoEvento)
+                        .addComponent(jButtonModificar))
+                    .addGroup(jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabelTitulo)
+                        .addComponent(jLabelNombreOrganizacion)
+                        .addComponent(jButtonRefrescar)
+                        .addComponent(jButtonEliminarEvento)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPaneEventos, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                .addGap(28, 28, 28))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -156,8 +190,10 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelDespliegueDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSeparatorDespliegueContenido)
-                    .addComponent(jPanelContenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanelContenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jSeparatorDespliegueContenido)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -168,16 +204,16 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparatorDespliegueContenido, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelContenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanelContenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonEliminarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarEventoActionPerformed
+    private void jButtonRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefrescarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonEliminarEventoActionPerformed
+    }//GEN-LAST:event_jButtonRefrescarActionPerformed
 
     private void jButtonNuevoEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoEventoActionPerformed
         try {
@@ -185,8 +221,47 @@ public class MainFrame extends javax.swing.JFrame {
             nuevo.CargarDatos(organizacion);
             nuevo.setVisible(true);
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonNuevoEventoActionPerformed
+
+    private void jButtonEliminarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarEventoActionPerformed
+        try {
+            int respuesta = JOptionPane.showConfirmDialog(this, "¿Está seguro de querer eliminar el evento seleccionado?");
+            if(respuesta == JOptionPane.YES_OPTION){
+                for (Evento _evento:  eventos) {
+                    if (_evento.getCodigo() == Integer.parseInt((jTableEventos.getValueAt(jTableEventos.getSelectedRow(), 0)).toString())) {
+                        new DAO.ImplEventoDAO().EliminarEvento(_evento);
+                        break;
+                    }
+                }
+                
+                JOptionPane.showMessageDialog(this, "Evento eliminado exitosamente", "Alerta", JOptionPane.INFORMATION_MESSAGE);
+
+                this.refrescarEventos();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocurrió un error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonEliminarEventoActionPerformed
+
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+        try {
+            
+            EventoFrame nuevo = new EventoFrame(this, true);
+            
+            for (Evento _evento:  this.eventos) {
+                if (_evento.getCodigo() == Integer.parseInt((jTableEventos.getValueAt(jTableEventos.getSelectedRow(), 0)).toString())) {
+                    nuevo.CargarDatos(organizacion, _evento);
+                    break;
+                }
+            }
+            nuevo.setVisible(true);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonModificarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,7 +300,9 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonEliminarEvento;
+    private javax.swing.JButton jButtonModificar;
     private javax.swing.JButton jButtonNuevoEvento;
+    private javax.swing.JButton jButtonRefrescar;
     private javax.swing.JLabel jLabelMensajeBienvenida;
     private javax.swing.JLabel jLabelNombreOrganizacion;
     private javax.swing.JLabel jLabelNombreUsuario;

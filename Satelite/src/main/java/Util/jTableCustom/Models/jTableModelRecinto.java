@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Util.jTableModels;
+package Util.jTableCustom.Models;
 
 import java.text.SimpleDateFormat;
 import javax.swing.table.DefaultTableModel;
@@ -26,6 +26,7 @@ public class jTableModelRecinto extends DefaultTableModel{
     }
     
     private void setColummns(){
+        this.addColumn("Codigo");
         this.addColumn("Nombre");
         this.addColumn("Dirección");
         this.addColumn("Comuna");
@@ -35,7 +36,8 @@ public class jTableModelRecinto extends DefaultTableModel{
     
     public void cargarDatos(DTO.Recinto recinto) {
         super.addRow(new Object[]{
-            recinto.getNombre()
+            recinto.getCodigo()
+            ,recinto.getNombre()
             ,recinto.getDireccion()
             ,recinto.getComuna().getNombre()
             ,recinto.getCapacidadMaxima()

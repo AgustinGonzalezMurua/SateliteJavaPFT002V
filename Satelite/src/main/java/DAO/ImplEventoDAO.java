@@ -20,11 +20,46 @@ public class ImplEventoDAO implements IEventoDAO{
         try {
             JSONObject _resultado = (JSONObject)JSONPARSER.parse(SERVICIO.registrarEvento(evento.toJSONString()));
             if (_resultado.containsKey("Error")) {
-                throw new ServiceError("Ha ocurrido un error: " + _resultado.get("Error").toString());
+                throw new ServiceError(_resultado.get("Error").toString());
             }
         } catch (Exception e) {
             throw new IllegalArgumentException(e.getMessage());
         }
     }
-    
+
+    @Override
+    public void ModificarEvento(Evento evento) {
+        try {
+            JSONObject _resultado = (JSONObject)JSONPARSER.parse(SERVICIO.modificarEvento(evento.toJSONString()));
+            if (_resultado.containsKey("Error")) {
+                throw new ServiceError(_resultado.get("Error").toString())   ;
+            }
+        } catch (Exception e) {
+            throw new IllegalArgumentException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void EliminarEvento(Evento evento) {
+        try{
+            JSONObject _resultado = (JSONObject)JSONPARSER.parse(SERVICIO.eliminarEvento(String.valueOf(evento.getCodigo())));
+            if (ContieneErrores(_resultado)) {
+                throw new ServiceError(_resultado.get("Error").toString());
+            }
+        } catch (Exception e){
+            throw new IllegalArgumentException(e.getMessage());
+        }
+    }
+ 
+        private boolean ContieneErrores(Object obj) throws ServiceError{
+        if (obj instanceof JSONObject) {
+                if (((JSONObject)obj).containsKey("Error")) {
+                    throw new ServiceError(((JSONObject)obj).get("Error").toString());
+                }else{
+                    return false;
+                }
+        }else{
+            return true;
+        }
+    }
 }
