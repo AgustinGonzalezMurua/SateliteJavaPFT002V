@@ -1,9 +1,15 @@
 package DAO;
 
+import static DAO.IBaseDAO.JSONPARSER;
+import static DAO.IBaseDAO.SERVICIO;
 import DTO.Usuario;
 import Exceptions.ServiceError;
+import java.util.ArrayList;
+import java.util.Iterator;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 import java.security.MessageDigest;
+
 
 public class ImplUsuarioDAO implements IUsuarioDAO {    
     @Override
@@ -76,4 +82,41 @@ public class ImplUsuarioDAO implements IUsuarioDAO {
             throw new IllegalArgumentException(e.getMessage());
         }
     }
+    
+    @Override
+    public ArrayList<Usuario> RecuperarUsuario_Todos() {
+        try {
+            ArrayList<Usuario> _usuarios = new ArrayList<>();
+            
+            String result = SERVICIO.recuperarUsuarioTodos();
+            Object _resultado = JSONPARSER.parse(result);
+            
+                 JSONArray _jusuarios = (JSONArray)_resultado;
+                Iterator iterator = _jusuarios.iterator();
+               
+                while(iterator.hasNext()){
+                    JSONObject jsonObject = (JSONObject) iterator.next();
+                    DTO.Usuario _usuario = new DTO.Usuario(jsonObject);
+                    _usuarios.add(_usuario);
+                
+            }
+            
+            return _usuarios;
+        } catch (Exception e) {
+            throw new IllegalArgumentException(e.getMessage());
+        }
+    }
+
+    private boolean ContieneErrores(Object obj) throws ServiceError{
+        if (obj instanceof JSONObject) {
+                if (((JSONObject)obj).containsKey("Error")) {
+                    throw new ServiceError("Ha ocurrido un error: " + ((JSONObject)obj).get("Error").toString());
+                }else{
+                    return false;
+                }
+        }else{
+            return true;
+        }
+    }
+   
 }

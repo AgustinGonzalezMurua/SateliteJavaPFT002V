@@ -27,7 +27,7 @@ public class Organizacion {
     public Organizacion() {
     }
 
-    public Organizacion(JSONObject json) throws ParseException {
+    public Organizacion(JSONObject json) throws ParseException, java.text.ParseException {
         this.RUT            = json.get("RUT").toString();
         this.Nombre         = json.get("Nombre").toString();
         this.RazonSocial    = json.get("RazonSocial").toString();
