@@ -59,14 +59,14 @@ public class EventoFrame extends javax.swing.JDialog {
      */
     public void CargarDatos(DTO.Organizacion organizacion, DTO.Evento evento){
         this.evento = evento;
-        this.jButtonNuevoEventoAgregar.setText("Modificar");
+        this.jButtonEventoAccion.setText("Modificar");
         this.setTitle("Modificar " + this.evento.getNombre() );
-        this.jTextFieldNuevoEventoNombre.setText(this.evento.getNombre());
-        this.jTextFieldNuevoEventoRecinto.setText(this.evento.getRecinto().getNombre());
+        this.jTextFieldEventoNombre.setText(this.evento.getNombre());
+        this.jTextFieldEventoRecinto.setText(this.evento.getRecinto().getNombre());
         this.jSpinnerHora.setValue(this.evento.getFecha().get(Calendar.HOUR_OF_DAY));
         this.jSpinnerMinutos.setValue(this.evento.getFecha().get(Calendar.MINUTE));
-        this.jTextFieldNuevoEventoTipo.setText(this.evento.getTipo().getDescripcion());
-        this.jTextFieldNuevoEventoNombre.setText(this.evento.getNombre());
+        this.jTextFieldEventoTipo.setText(this.evento.getTipo().getDescripcion());
+        this.jTextFieldEventoNombre.setText(this.evento.getNombre());
         
         tipoEventos.forEach((tipo)->{
             if (tipo.getCodigo() == this.evento.getTipo().getCodigo()) {
@@ -110,21 +110,21 @@ public class EventoFrame extends javax.swing.JDialog {
         jTableRecintos = new javax.swing.JTable();
         jButtonListoRecintos = new javax.swing.JButton();
         jPanelContenidoEventoNuevo = new javax.swing.JPanel();
-        jLabelNuevoEventoNombre = new javax.swing.JLabel();
-        jLabelNuevoEventoTipo = new javax.swing.JLabel();
-        jLabelNuevoEventoRecinto = new javax.swing.JLabel();
-        jLabelNuevoEventoFecha = new javax.swing.JLabel();
-        jTextFieldNuevoEventoNombre = new javax.swing.JTextField();
-        jTextFieldNuevoEventoTipo = new javax.swing.JTextField();
-        jTextFieldNuevoEventoRecinto = new javax.swing.JTextField();
-        jButtonNuevoEventoTipo = new javax.swing.JButton();
-        jButtonNuevoEventoRecinto = new javax.swing.JButton();
+        jLabelEventoNombre = new javax.swing.JLabel();
+        jLabelEventoTipo = new javax.swing.JLabel();
+        jLabelEventoRecinto = new javax.swing.JLabel();
+        jLabelEventoFecha = new javax.swing.JLabel();
+        jTextFieldEventoNombre = new javax.swing.JTextField();
+        jTextFieldEventoTipo = new javax.swing.JTextField();
+        jTextFieldEventoRecinto = new javax.swing.JTextField();
+        jButtonEventoTipo = new javax.swing.JButton();
+        jButtonEventoRecinto = new javax.swing.JButton();
         dateChooserComboFecha = new datechooser.beans.DateChooserCombo();
-        jLabelNuevoEventoHora = new javax.swing.JLabel();
+        jLabelEventoHora = new javax.swing.JLabel();
         jSpinnerHora = new javax.swing.JSpinner();
         jSpinnerMinutos = new javax.swing.JSpinner();
-        jLabelNuevoEventoHoraSeparador = new javax.swing.JLabel();
-        jButtonNuevoEventoAgregar = new javax.swing.JButton();
+        jLabelEventoHoraSeparador = new javax.swing.JLabel();
+        jButtonEventoAccion = new javax.swing.JButton();
 
         jDialogTipoEvento.setModal(true);
         jDialogTipoEvento.setResizable(false);
@@ -265,33 +265,33 @@ public class EventoFrame extends javax.swing.JDialog {
         setModal(true);
         setResizable(false);
 
-        jLabelNuevoEventoNombre.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabelNuevoEventoNombre.setText("Nombre");
+        jLabelEventoNombre.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelEventoNombre.setText("Nombre");
 
-        jLabelNuevoEventoTipo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabelNuevoEventoTipo.setText("Tipo");
+        jLabelEventoTipo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelEventoTipo.setText("Tipo");
 
-        jLabelNuevoEventoRecinto.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabelNuevoEventoRecinto.setText("Recinto");
+        jLabelEventoRecinto.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelEventoRecinto.setText("Recinto");
 
-        jLabelNuevoEventoFecha.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabelNuevoEventoFecha.setText("Fecha");
+        jLabelEventoFecha.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelEventoFecha.setText("Fecha");
 
-        jTextFieldNuevoEventoTipo.setEnabled(false);
+        jTextFieldEventoTipo.setEnabled(false);
 
-        jTextFieldNuevoEventoRecinto.setEnabled(false);
+        jTextFieldEventoRecinto.setEnabled(false);
 
-        jButtonNuevoEventoTipo.setText("Cambiar");
-        jButtonNuevoEventoTipo.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEventoTipo.setText("Cambiar");
+        jButtonEventoTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNuevoEventoTipoActionPerformed(evt);
+                jButtonEventoTipoActionPerformed(evt);
             }
         });
 
-        jButtonNuevoEventoRecinto.setText("Cambiar");
-        jButtonNuevoEventoRecinto.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEventoRecinto.setText("Cambiar");
+        jButtonEventoRecinto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNuevoEventoRecintoActionPerformed(evt);
+                jButtonEventoRecintoActionPerformed(evt);
             }
         });
 
@@ -342,20 +342,20 @@ public class EventoFrame extends javax.swing.JDialog {
     dateChooserComboFecha.setFormat(0);
     dateChooserComboFecha.setLocale(new java.util.Locale("es", "CL", ""));
 
-    jLabelNuevoEventoHora.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-    jLabelNuevoEventoHora.setText("Hora");
+    jLabelEventoHora.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    jLabelEventoHora.setText("Hora");
 
     jSpinnerHora.setModel(new javax.swing.SpinnerNumberModel(1, 1, 24, 1));
 
     jSpinnerMinutos.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
 
-    jLabelNuevoEventoHoraSeparador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-    jLabelNuevoEventoHoraSeparador.setText(":");
+    jLabelEventoHoraSeparador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    jLabelEventoHoraSeparador.setText(":");
 
-    jButtonNuevoEventoAgregar.setText("Nuevo");
-    jButtonNuevoEventoAgregar.addActionListener(new java.awt.event.ActionListener() {
+    jButtonEventoAccion.setText("Nuevo");
+    jButtonEventoAccion.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jButtonNuevoEventoAgregarActionPerformed(evt);
+            jButtonEventoAccionActionPerformed(evt);
         }
     });
 
@@ -366,34 +366,34 @@ public class EventoFrame extends javax.swing.JDialog {
         .addGroup(jPanelContenidoEventoNuevoLayout.createSequentialGroup()
             .addContainerGap()
             .addGroup(jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                .addComponent(jLabelNuevoEventoRecinto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelNuevoEventoTipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelNuevoEventoNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelNuevoEventoFecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelNuevoEventoHora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabelEventoRecinto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelEventoTipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelEventoNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelEventoFecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelEventoHora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addGroup(jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanelContenidoEventoNuevoLayout.createSequentialGroup()
                     .addGroup(jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextFieldNuevoEventoNombre)
+                        .addComponent(jTextFieldEventoNombre)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelContenidoEventoNuevoLayout.createSequentialGroup()
                             .addGroup(jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jTextFieldNuevoEventoRecinto, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
-                                .addComponent(jTextFieldNuevoEventoTipo))
+                                .addComponent(jTextFieldEventoRecinto, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                                .addComponent(jTextFieldEventoTipo))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jButtonNuevoEventoTipo, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jButtonNuevoEventoRecinto, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                .addComponent(jButtonEventoTipo, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jButtonEventoRecinto, javax.swing.GroupLayout.Alignment.TRAILING)))
                         .addComponent(dateChooserComboFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGap(0, 0, Short.MAX_VALUE))
                 .addGroup(jPanelContenidoEventoNuevoLayout.createSequentialGroup()
                     .addComponent(jSpinnerHora, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jLabelNuevoEventoHoraSeparador, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEventoHoraSeparador, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jSpinnerMinutos, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
-                    .addComponent(jButtonNuevoEventoAgregar)))
+                    .addComponent(jButtonEventoAccion)))
             .addContainerGap())
     );
     jPanelContenidoEventoNuevoLayout.setVerticalGroup(
@@ -401,29 +401,29 @@ public class EventoFrame extends javax.swing.JDialog {
         .addGroup(jPanelContenidoEventoNuevoLayout.createSequentialGroup()
             .addContainerGap()
             .addGroup(jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabelNuevoEventoNombre)
-                .addComponent(jTextFieldNuevoEventoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabelEventoNombre)
+                .addComponent(jTextFieldEventoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGap(8, 8, 8)
             .addGroup(jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabelNuevoEventoTipo)
-                .addComponent(jTextFieldNuevoEventoTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jButtonNuevoEventoTipo))
+                .addComponent(jLabelEventoTipo)
+                .addComponent(jTextFieldEventoTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonEventoTipo))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabelNuevoEventoRecinto)
-                .addComponent(jTextFieldNuevoEventoRecinto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jButtonNuevoEventoRecinto))
+                .addComponent(jLabelEventoRecinto)
+                .addComponent(jTextFieldEventoRecinto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonEventoRecinto))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                .addComponent(jLabelNuevoEventoFecha)
+                .addComponent(jLabelEventoFecha)
                 .addComponent(dateChooserComboFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGap(10, 10, 10)
             .addGroup(jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabelNuevoEventoHora)
+                .addComponent(jLabelEventoHora)
                 .addComponent(jSpinnerHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jLabelNuevoEventoHoraSeparador)
+                .addComponent(jLabelEventoHoraSeparador)
                 .addComponent(jSpinnerMinutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jButtonNuevoEventoAgregar))
+                .addComponent(jButtonEventoAccion))
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
@@ -447,17 +447,17 @@ public class EventoFrame extends javax.swing.JDialog {
     pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonNuevoEventoTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoEventoTipoActionPerformed
+    private void jButtonEventoTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEventoTipoActionPerformed
         try {
             jDialogTipoEvento.setVisible(true);
         } catch (Exception e) {
         }
-    }//GEN-LAST:event_jButtonNuevoEventoTipoActionPerformed
+    }//GEN-LAST:event_jButtonEventoTipoActionPerformed
 
-    private void jButtonNuevoEventoAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoEventoAgregarActionPerformed
+    private void jButtonEventoAccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEventoAccionActionPerformed
 
         try{
-            this.evento.setNombre(jTextFieldNuevoEventoNombre.getText());
+            this.evento.setNombre(jTextFieldEventoNombre.getText());
             this.evento.setFecha(this.dateChooserComboFecha.getSelectedDate().getTime());
             this.evento.getFecha().set(Calendar.HOUR_OF_DAY, (int)jSpinnerHora.getValue());
             this.evento.getFecha().set(Calendar.MINUTE, (int)jSpinnerMinutos.getValue());
@@ -489,28 +489,28 @@ public class EventoFrame extends javax.swing.JDialog {
                 "Error",
                 JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jButtonNuevoEventoAgregarActionPerformed
+    }//GEN-LAST:event_jButtonEventoAccionActionPerformed
 
     private void jButtonTipoEventoListoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTipoEventoListoActionPerformed
-        this.jTextFieldNuevoEventoTipo.setText(jListTiposEventos.getSelectedValue());
+        this.jTextFieldEventoTipo.setText(jListTiposEventos.getSelectedValue());
         this.evento.setTipo(tipoEventos.get(jListTiposEventos.getSelectedIndex()));
         this.jDialogTipoEvento.setVisible(false);
     }//GEN-LAST:event_jButtonTipoEventoListoActionPerformed
 
     private void jButtonListoRecintosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListoRecintosActionPerformed
-        this.jTextFieldNuevoEventoRecinto.setText(
+        this.jTextFieldEventoRecinto.setText(
                 jTableRecintos.getValueAt(jTableRecintos.getSelectedRow(), 1).toString()
         );
         this.evento.setRecinto(recintos.get(jTableRecintos.getSelectedRow()));
         this.jDialogRecintos.setVisible(false);
     }//GEN-LAST:event_jButtonListoRecintosActionPerformed
 
-    private void jButtonNuevoEventoRecintoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoEventoRecintoActionPerformed
+    private void jButtonEventoRecintoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEventoRecintoActionPerformed
         try{
             jDialogRecintos.setVisible(true);
         }catch(Exception e){
         }
-    }//GEN-LAST:event_jButtonNuevoEventoRecintoActionPerformed
+    }//GEN-LAST:event_jButtonEventoRecintoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -559,19 +559,19 @@ public class EventoFrame extends javax.swing.JDialog {
     private datechooser.beans.DateChooserCombo dateChooserComboFecha;
     private javax.swing.JButton jButtonBuscarRecinto;
     private javax.swing.JButton jButtonBuscarTipoEvento;
+    private javax.swing.JButton jButtonEventoAccion;
+    private javax.swing.JButton jButtonEventoRecinto;
+    private javax.swing.JButton jButtonEventoTipo;
     private javax.swing.JButton jButtonListoRecintos;
-    private javax.swing.JButton jButtonNuevoEventoAgregar;
-    private javax.swing.JButton jButtonNuevoEventoRecinto;
-    private javax.swing.JButton jButtonNuevoEventoTipo;
     private javax.swing.JButton jButtonTipoEventoListo;
     private javax.swing.JDialog jDialogRecintos;
     private javax.swing.JDialog jDialogTipoEvento;
-    private javax.swing.JLabel jLabelNuevoEventoFecha;
-    private javax.swing.JLabel jLabelNuevoEventoHora;
-    private javax.swing.JLabel jLabelNuevoEventoHoraSeparador;
-    private javax.swing.JLabel jLabelNuevoEventoNombre;
-    private javax.swing.JLabel jLabelNuevoEventoRecinto;
-    private javax.swing.JLabel jLabelNuevoEventoTipo;
+    private javax.swing.JLabel jLabelEventoFecha;
+    private javax.swing.JLabel jLabelEventoHora;
+    private javax.swing.JLabel jLabelEventoHoraSeparador;
+    private javax.swing.JLabel jLabelEventoNombre;
+    private javax.swing.JLabel jLabelEventoRecinto;
+    private javax.swing.JLabel jLabelEventoTipo;
     private javax.swing.JList<String> jListTiposEventos;
     private javax.swing.JPanel jPanelContenidoEventoNuevo;
     private javax.swing.JPanel jPanelContenidoReicnto;
@@ -585,9 +585,9 @@ public class EventoFrame extends javax.swing.JDialog {
     private javax.swing.JTable jTableRecintos;
     private javax.swing.JTextField jTextFieldBuscarRecinto;
     private javax.swing.JTextField jTextFieldBuscarTipoEvento;
-    private javax.swing.JTextField jTextFieldNuevoEventoNombre;
-    private javax.swing.JTextField jTextFieldNuevoEventoRecinto;
-    private javax.swing.JTextField jTextFieldNuevoEventoTipo;
+    private javax.swing.JTextField jTextFieldEventoNombre;
+    private javax.swing.JTextField jTextFieldEventoRecinto;
+    private javax.swing.JTextField jTextFieldEventoTipo;
     // End of variables declaration//GEN-END:variables
 
 }
