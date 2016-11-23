@@ -7,9 +7,6 @@ package GUI.Administrador;
 
 import DTO.*;
 import java.util.ArrayList;
-import javax.swing.JTable;
-import Util.jTableModels.jTableModelUsuarios;
-import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
         
@@ -200,10 +197,7 @@ public class ListarUsuarios extends javax.swing.JDialog {
         jLabel6.setEnabled(false);
 
         cbxTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Supervisor", "Organizador", "Cliente" }));
-<<<<<<< HEAD
-=======
         cbxTipoUsuario.setEnabled(false);
->>>>>>> origin/listarUsuario
 
         jLabel7.setText("Clave :");
 
@@ -407,11 +401,8 @@ public class ListarUsuarios extends javax.swing.JDialog {
             this.usuario.setTipo(cbxTipoUsuario.getSelectedIndex());
             this.usuario.setFono(Integer.parseInt(txtTelefono.getText()));
             this.usuario.setEmail(txtCorreo.getText());
-<<<<<<< HEAD
            // this.usuario.setClave(txtClave.getText());
-=======
             this.usuario.setClave(txtClave.getText());
->>>>>>> origin/listarUsuario
              new DAO.ImplUsuarioDAO().CrearUsuario(usuario);
             JOptionPane.showMessageDialog(this,
                 "Usuario agregado exitosamente",

@@ -12,11 +12,6 @@ public class Usuario {
     private String Email;
     private int Estado;
     private String Clave;
-<<<<<<< HEAD
-
-  
-=======
->>>>>>> origin/listarUsuario
     
     public Usuario() {
     }
@@ -28,13 +23,8 @@ public class Usuario {
         this.setFono(Integer.parseInt(jobject.get("Fono").toString()));
         this.setEmail(jobject.get("Email").toString());
         this.setEstado(Integer.parseInt(jobject.get("Estado").toString()));
-<<<<<<< HEAD
      //   this.setClave(jobject.get("Contraseña").toString());
-
-=======
         this.setClave(jobject.get("Contraseña").toString());
-   
->>>>>>> origin/listarUsuario
    }
      public int getEstado()
    {
@@ -112,15 +102,8 @@ public class Usuario {
                 + "\"Estado\" : \"" + Estado + "\"" 
                 +'}';
     }
-<<<<<<< HEAD
-    public String toJSONString(){
-        return org.json.simple.JSONValue.toJSONString(this);
-    }
-=======
     
 public String toJSONString(){
         return org.json.simple.JSONValue.toJSONString(this);
     }
-    
->>>>>>> origin/listarUsuario
 }
