@@ -1,5 +1,6 @@
 package DTO;
 
+import javax.swing.JTable;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
@@ -10,7 +11,8 @@ public class Usuario {
     private int Fono;
     private String Email;
     private int Estado;
-
+    private String Clave;
+    
     public Usuario() {
     }
 
@@ -21,6 +23,7 @@ public class Usuario {
         this.setFono(Integer.parseInt(jobject.get("Fono").toString()));
         this.setEmail(jobject.get("Email").toString());
         this.setEstado(Integer.parseInt(jobject.get("Estado").toString()));
+        this.setClave(jobject.get("Contraseña").toString());
    
    }
      public int getEstado()
@@ -71,6 +74,14 @@ public class Usuario {
     public void setNombre(String Nombre) {
         this.Nombre = Nombre;
     }
+     public String getClave()
+   {
+       return Clave;
+   }
+   public void setClave(String Clave)
+   {
+       this.Clave = Clave;
+   }
     
     @Override
     public String toString() {
@@ -82,6 +93,10 @@ public class Usuario {
                 + "\"Correo\" : \"" + Email + "\"" 
                 + "\"Estado\" : \"" + Estado + "\"" 
                 +'}';
+    }
+    
+public String toJSONString(){
+        return org.json.simple.JSONValue.toJSONString(this);
     }
     
 }
