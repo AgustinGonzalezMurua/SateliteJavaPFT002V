@@ -38,14 +38,17 @@ public class ImplUsuarioDAO implements IUsuarioDAO {
         }
     }
 
-    @Override
-    public Usuario CrearUsuario(String nombre, String run, int telefono, String email, int tipo_usuario, String contrasena) {
-        Usuario _usuario = new Usuario();
+    public void CrearUsuario(Usuario usuario) {
+
         try {
-             //String result = SERVICIO.registrarUsuario(run);
-             return _usuario;
+          JSONObject _resultado = (JSONObject)JSONPARSER.parse(SERVICIO.registrarUsuarioDesdeAdmin(usuario.toJSONString()));
+          if(_resultado.containsKey("Error")){
+                throw new ServiceError("Ha ocurrido un error: " + _resultado.get("Error").toString());              
+          }  
+           
         } catch (Exception e) {
-            throw new IllegalArgumentException(e.getMessage());
+                        throw new IllegalArgumentException(e.getMessage());
+  
         }
  
     }
@@ -107,6 +110,18 @@ public class ImplUsuarioDAO implements IUsuarioDAO {
         }
     }
 
+    public void Eliminar_Usuario(Usuario usuario) {
+        try{
+            JSONObject _resultado = (JSONObject)JSONPARSER.parse(SERVICIO.eliminarUsuario(String.valueOf(usuario.getRUN())));
+            if (ContieneErrores(_resultado)) {
+                throw new ServiceError("Ha ocurrido un error al eliminar el evento:" + _resultado.get("Error").toString());
+            }
+        } catch (Exception e){
+            throw new IllegalArgumentException(e.getMessage());
+        }
+    }
+    
+    
     private boolean ContieneErrores(Object obj) throws ServiceError{
         if (obj instanceof JSONObject) {
                 if (((JSONObject)obj).containsKey("Error")) {
@@ -118,5 +133,7 @@ public class ImplUsuarioDAO implements IUsuarioDAO {
             return true;
         }
     }
+
+   
    
 }
