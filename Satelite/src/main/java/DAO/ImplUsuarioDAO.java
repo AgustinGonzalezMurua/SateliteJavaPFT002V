@@ -53,6 +53,7 @@ public class ImplUsuarioDAO implements IUsuarioDAO {
  
     }
 
+
     @Override
     public Usuario ObtenerUsuario(String RUN) {
         Usuario _usuario = new Usuario();
@@ -106,6 +107,17 @@ public class ImplUsuarioDAO implements IUsuarioDAO {
             
             return _usuarios;
         } catch (Exception e) {
+            throw new IllegalArgumentException(e.getMessage());
+        }
+    }
+    
+    public void Eliminar_Usuario(Usuario usuario) {
+        try{
+            JSONObject _resultado = (JSONObject)JSONPARSER.parse(SERVICIO.eliminarUsuario(String.valueOf(usuario.getRUN())));
+            if (ContieneErrores(_resultado)) {
+                throw new ServiceError("Ha ocurrido un error al eliminar el evento:" + _resultado.get("Error").toString());
+            }
+        } catch (Exception e){
             throw new IllegalArgumentException(e.getMessage());
         }
     }
