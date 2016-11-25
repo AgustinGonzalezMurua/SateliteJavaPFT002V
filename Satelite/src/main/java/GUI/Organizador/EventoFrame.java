@@ -11,6 +11,8 @@ import DTO.TipoGeneric;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 /**
  *
@@ -80,6 +82,7 @@ public class EventoFrame extends javax.swing.JDialog {
             }
         });
         
+        jSpinnerCantidaAsientos.setEnabled(true);
         
         this.CargarDatos(organizacion);
     }
@@ -125,6 +128,8 @@ public class EventoFrame extends javax.swing.JDialog {
         jSpinnerMinutos = new javax.swing.JSpinner();
         jLabelEventoHoraSeparador = new javax.swing.JLabel();
         jButtonEventoAccion = new javax.swing.JButton();
+        jLabelCantidadEntradas = new javax.swing.JLabel();
+        jSpinnerCantidaAsientos = new javax.swing.JSpinner();
 
         jDialogTipoEvento.setModal(true);
         jDialogTipoEvento.setResizable(false);
@@ -298,13 +303,13 @@ public class EventoFrame extends javax.swing.JDialog {
         dateChooserComboFecha.setCurrentView(new datechooser.view.appearance.AppearancesList("Swing",
             new datechooser.view.appearance.ViewAppearance("custom",
                 new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
-                    new java.awt.Color(222, 222, 222),
+                    new java.awt.Color(187, 187, 187),
                     new java.awt.Color(0, 0, 255),
                     false,
                     true,
                     new datechooser.view.appearance.swing.ButtonPainter()),
                 new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
-                    new java.awt.Color(222, 222, 222),
+                    new java.awt.Color(187, 187, 187),
                     new java.awt.Color(0, 0, 255),
                     true,
                     true,
@@ -322,13 +327,13 @@ public class EventoFrame extends javax.swing.JDialog {
                     true,
                     new datechooser.view.appearance.swing.LabelPainter()),
                 new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
-                    new java.awt.Color(222, 222, 222),
+                    new java.awt.Color(187, 187, 187),
                     new java.awt.Color(0, 0, 255),
                     false,
                     true,
                     new datechooser.view.appearance.swing.LabelPainter()),
                 new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
-                    new java.awt.Color(222, 222, 222),
+                    new java.awt.Color(187, 187, 187),
                     new java.awt.Color(255, 0, 0),
                     false,
                     false,
@@ -359,42 +364,50 @@ public class EventoFrame extends javax.swing.JDialog {
         }
     });
 
+    jLabelCantidadEntradas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    jLabelCantidadEntradas.setText("Asientos");
+
+    jSpinnerCantidaAsientos.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+    jSpinnerCantidaAsientos.setEnabled(false);
+
     javax.swing.GroupLayout jPanelContenidoEventoNuevoLayout = new javax.swing.GroupLayout(jPanelContenidoEventoNuevo);
     jPanelContenidoEventoNuevo.setLayout(jPanelContenidoEventoNuevoLayout);
     jPanelContenidoEventoNuevoLayout.setHorizontalGroup(
         jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanelContenidoEventoNuevoLayout.createSequentialGroup()
             .addContainerGap()
-            .addGroup(jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                .addComponent(jLabelEventoRecinto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelEventoTipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelEventoNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelEventoFecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelEventoHora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addGroup(jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(jButtonEventoAccion)
                 .addGroup(jPanelContenidoEventoNuevoLayout.createSequentialGroup()
+                    .addGroup(jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabelEventoRecinto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelEventoTipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelEventoNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelEventoFecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelEventoHora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanelContenidoEventoNuevoLayout.createSequentialGroup()
+                            .addComponent(jSpinnerHora, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabelEventoHoraSeparador)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jSpinnerMinutos, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(49, 49, 49)
+                            .addComponent(jLabelCantidadEntradas)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jSpinnerCantidaAsientos, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jTextFieldEventoNombre)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelContenidoEventoNuevoLayout.createSequentialGroup()
                             .addGroup(jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jTextFieldEventoRecinto, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                                .addComponent(jTextFieldEventoRecinto)
                                 .addComponent(jTextFieldEventoTipo))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jButtonEventoTipo, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jButtonEventoRecinto, javax.swing.GroupLayout.Alignment.TRAILING)))
-                        .addComponent(dateChooserComboFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGap(0, 0, Short.MAX_VALUE))
-                .addGroup(jPanelContenidoEventoNuevoLayout.createSequentialGroup()
-                    .addComponent(jSpinnerHora, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jLabelEventoHoraSeparador, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jSpinnerMinutos, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
-                    .addComponent(jButtonEventoAccion)))
-            .addContainerGap())
+                        .addComponent(dateChooserComboFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     jPanelContenidoEventoNuevoLayout.setVerticalGroup(
         jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -417,13 +430,16 @@ public class EventoFrame extends javax.swing.JDialog {
             .addGroup(jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                 .addComponent(jLabelEventoFecha)
                 .addComponent(dateChooserComboFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGap(10, 10, 10)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addGroup(jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabelEventoHora)
                 .addComponent(jSpinnerHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jLabelEventoHoraSeparador)
                 .addComponent(jSpinnerMinutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jButtonEventoAccion))
+                .addComponent(jLabelCantidadEntradas)
+                .addComponent(jSpinnerCantidaAsientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jButtonEventoAccion)
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
@@ -498,10 +514,20 @@ public class EventoFrame extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonTipoEventoListoActionPerformed
 
     private void jButtonListoRecintosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListoRecintosActionPerformed
-        this.jTextFieldEventoRecinto.setText(
-                jTableRecintos.getValueAt(jTableRecintos.getSelectedRow(), 1).toString()
-        );
         this.evento.setRecinto(recintos.get(jTableRecintos.getSelectedRow()));
+        this.jTextFieldEventoRecinto.setText(this.evento.getRecinto().getNombre());
+        jSpinnerCantidaAsientos.setModel(new SpinnerNumberModel(){
+            @Override
+            public Comparable getMaximum() {
+                return evento.getRecinto().getCapacidadMaxima();
+            }
+
+            @Override
+            public Comparable getMinimum() {
+                return 1;
+            }
+        });
+        jSpinnerCantidaAsientos.setEnabled(true);
         this.jDialogRecintos.setVisible(false);
     }//GEN-LAST:event_jButtonListoRecintosActionPerformed
 
@@ -566,6 +592,7 @@ public class EventoFrame extends javax.swing.JDialog {
     private javax.swing.JButton jButtonTipoEventoListo;
     private javax.swing.JDialog jDialogRecintos;
     private javax.swing.JDialog jDialogTipoEvento;
+    private javax.swing.JLabel jLabelCantidadEntradas;
     private javax.swing.JLabel jLabelEventoFecha;
     private javax.swing.JLabel jLabelEventoHora;
     private javax.swing.JLabel jLabelEventoHoraSeparador;
@@ -580,6 +607,7 @@ public class EventoFrame extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPaneTiposEventos;
     private javax.swing.JSeparator jSeparator;
     private javax.swing.JSeparator jSeparatorRecinto;
+    private javax.swing.JSpinner jSpinnerCantidaAsientos;
     private javax.swing.JSpinner jSpinnerHora;
     private javax.swing.JSpinner jSpinnerMinutos;
     private javax.swing.JTable jTableRecintos;

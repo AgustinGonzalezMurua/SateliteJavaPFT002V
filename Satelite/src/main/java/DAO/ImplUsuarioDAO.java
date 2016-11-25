@@ -13,7 +13,7 @@ import java.security.MessageDigest;
 
 public class ImplUsuarioDAO implements IUsuarioDAO {    
     @Override
-    public Usuario Autenticar(String run, String contrasena) {
+    public Usuario Autenticar(String run, String contrasena){
         Usuario _usuario = new Usuario();
         try {            
             //Consume un método del servicio
