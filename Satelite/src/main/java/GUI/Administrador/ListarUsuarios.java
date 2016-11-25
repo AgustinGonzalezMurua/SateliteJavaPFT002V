@@ -402,7 +402,6 @@ public class ListarUsuarios extends javax.swing.JDialog {
             this.usuario.setFono(Integer.parseInt(txtTelefono.getText()));
             this.usuario.setEmail(txtCorreo.getText());
            // this.usuario.setClave(txtClave.getText());
-            this.usuario.setClave(txtClave.getText());
              new DAO.ImplUsuarioDAO().CrearUsuario(usuario);
             JOptionPane.showMessageDialog(this,
                 "Usuario agregado exitosamente",

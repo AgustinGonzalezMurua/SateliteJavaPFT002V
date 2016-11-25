@@ -82,11 +82,18 @@ public class EventoFrame extends javax.swing.JDialog {
             }
         });
         
+        ModificarAsientosMaximos();
         jSpinnerCantidaAsientos.setEnabled(true);
         
         this.CargarDatos(organizacion);
     }
 
+    private void ModificarAsientosMaximos(){
+        int num = this.evento.getRecinto().getCapacidadMaxima();
+        jSpinnerCantidaAsientos.setModel(new SpinnerNumberModel(num, 0, num, 1){
+        });
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -346,6 +353,7 @@ public class EventoFrame extends javax.swing.JDialog {
     dateChooserComboFecha.setNothingAllowed(false);
     dateChooserComboFecha.setFormat(0);
     dateChooserComboFecha.setLocale(new java.util.Locale("es", "CL", ""));
+    dateChooserComboFecha.setMinDate(Calendar.getInstance());
 
     jLabelEventoHora.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
     jLabelEventoHora.setText("Hora");
@@ -516,18 +524,8 @@ public class EventoFrame extends javax.swing.JDialog {
     private void jButtonListoRecintosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListoRecintosActionPerformed
         this.evento.setRecinto(recintos.get(jTableRecintos.getSelectedRow()));
         this.jTextFieldEventoRecinto.setText(this.evento.getRecinto().getNombre());
-        jSpinnerCantidaAsientos.setModel(new SpinnerNumberModel(){
-            @Override
-            public Comparable getMaximum() {
-                return evento.getRecinto().getCapacidadMaxima();
-            }
-
-            @Override
-            public Comparable getMinimum() {
-                return 1;
-            }
-        });
-        jSpinnerCantidaAsientos.setEnabled(true);
+        this.ModificarAsientosMaximos();
+        this.jSpinnerCantidaAsientos.setEnabled(true);
         this.jDialogRecintos.setVisible(false);
     }//GEN-LAST:event_jButtonListoRecintosActionPerformed
 
