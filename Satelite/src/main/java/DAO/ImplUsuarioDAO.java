@@ -13,7 +13,7 @@ import java.security.MessageDigest;
 
 public class ImplUsuarioDAO implements IUsuarioDAO {    
     @Override
-    public Usuario Autenticar(String run, String contrasena) {
+    public Usuario Autenticar(String run, String contrasena){
         Usuario _usuario = new Usuario();
         try {            
             //Consume un método del servicio
@@ -52,6 +52,7 @@ public class ImplUsuarioDAO implements IUsuarioDAO {
         }
  
     }
+
 
     @Override
     public Usuario ObtenerUsuario(String RUN) {
@@ -109,7 +110,7 @@ public class ImplUsuarioDAO implements IUsuarioDAO {
             throw new IllegalArgumentException(e.getMessage());
         }
     }
-
+    
     public void Eliminar_Usuario(Usuario usuario) {
         try{
             JSONObject _resultado = (JSONObject)JSONPARSER.parse(SERVICIO.eliminarUsuario(String.valueOf(usuario.getRUN())));
@@ -120,7 +121,6 @@ public class ImplUsuarioDAO implements IUsuarioDAO {
             throw new IllegalArgumentException(e.getMessage());
         }
     }
-    
     
     private boolean ContieneErrores(Object obj) throws ServiceError{
         if (obj instanceof JSONObject) {

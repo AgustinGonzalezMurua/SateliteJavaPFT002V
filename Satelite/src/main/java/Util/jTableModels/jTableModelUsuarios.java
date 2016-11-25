@@ -22,22 +22,26 @@ public class jTableModelUsuarios extends DefaultTableModel{
         this.addColumn("Telefono");
         this.addColumn("Email");
         this.addColumn("Perfil");
-       
+    
     }
+        
+                
 
     public void cargarDatos(Usuario usuario) {
     //    SimpleDateFormat sdt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        
+
         super.addRow(new Object[]{
             usuario.getRUN(),
             usuario.getNombre(),
             usuario.getFono(),
             usuario.getEmail(),
-            usuario.getTipo()
-            
-        });
-
-    }
+            usuario.getTipo(),
+                
+        } 
+                
+        );
+     }
+    
     
     public boolean[] editable = new boolean[]{
         false
@@ -52,7 +56,7 @@ public class jTableModelUsuarios extends DefaultTableModel{
       public void removerDatos(){
         this.setRowCount(0);
     }      
-    
+
     
     
 }

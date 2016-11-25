@@ -7,12 +7,8 @@ package GUI.Organizador;
 
 import DTO.*;
 import java.util.ArrayList;
-import javax.swing.JTable;
 import Util.jTableCustom.Models.jTableModelEvento;
 import javax.swing.JOptionPane;
-import javax.swing.event.TableModelEvent;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 /**
  *
  * @author Agustin
