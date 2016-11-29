@@ -11,7 +11,6 @@ import DTO.TipoGeneric;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
-import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
 /**
@@ -51,6 +50,7 @@ public class EventoFrame extends javax.swing.JDialog {
      */
     public void CargarDatos(DTO.Organizacion organizacion){
         this.evento.setOrganizacion(organizacion);
+        this.jSpinnerPrecio.setEnabled(true);
     }
     
     
@@ -83,9 +83,9 @@ public class EventoFrame extends javax.swing.JDialog {
         });
         
         ModificarAsientosMaximos();
-        jSpinnerCantidaAsientos.setEnabled(true);
-        
-        this.CargarDatos(organizacion);
+        jLabelPrecio.setVisible(false);
+        jSpinnerPrecio.setVisible(false);
+        this.evento.setOrganizacion(organizacion);
     }
 
     private void ModificarAsientosMaximos(){
@@ -137,6 +137,8 @@ public class EventoFrame extends javax.swing.JDialog {
         jButtonEventoAccion = new javax.swing.JButton();
         jLabelCantidadEntradas = new javax.swing.JLabel();
         jSpinnerCantidaAsientos = new javax.swing.JSpinner();
+        jLabelPrecio = new javax.swing.JLabel();
+        jSpinnerPrecio = new javax.swing.JSpinner();
 
         jDialogTipoEvento.setModal(true);
         jDialogTipoEvento.setResizable(false);
@@ -372,18 +374,26 @@ public class EventoFrame extends javax.swing.JDialog {
         }
     });
 
-    jLabelCantidadEntradas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    jLabelCantidadEntradas.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
     jLabelCantidadEntradas.setText("Asientos");
+    jLabelCantidadEntradas.setToolTipText("");
 
     jSpinnerCantidaAsientos.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
     jSpinnerCantidaAsientos.setEnabled(false);
+
+    jLabelPrecio.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    jLabelPrecio.setText("Precio: $");
+
+    jSpinnerPrecio.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 10));
+    jSpinnerPrecio.setEnabled(false);
+    jSpinnerPrecio.setOpaque(false);
 
     javax.swing.GroupLayout jPanelContenidoEventoNuevoLayout = new javax.swing.GroupLayout(jPanelContenidoEventoNuevo);
     jPanelContenidoEventoNuevo.setLayout(jPanelContenidoEventoNuevoLayout);
     jPanelContenidoEventoNuevoLayout.setHorizontalGroup(
         jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanelContenidoEventoNuevoLayout.createSequentialGroup()
-            .addContainerGap()
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                 .addComponent(jButtonEventoAccion)
                 .addGroup(jPanelContenidoEventoNuevoLayout.createSequentialGroup()
@@ -401,8 +411,8 @@ public class EventoFrame extends javax.swing.JDialog {
                             .addComponent(jLabelEventoHoraSeparador)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jSpinnerMinutos, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(49, 49, 49)
-                            .addComponent(jLabelCantidadEntradas)
+                            .addGap(38, 38, 38)
+                            .addComponent(jLabelCantidadEntradas, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jSpinnerCantidaAsientos, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jTextFieldEventoNombre)
@@ -414,8 +424,12 @@ public class EventoFrame extends javax.swing.JDialog {
                             .addGroup(jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jButtonEventoTipo, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jButtonEventoRecinto, javax.swing.GroupLayout.Alignment.TRAILING)))
-                        .addComponent(dateChooserComboFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(dateChooserComboFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanelContenidoEventoNuevoLayout.createSequentialGroup()
+                    .addComponent(jLabelPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jSpinnerPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGap(6, 6, 6))
     );
     jPanelContenidoEventoNuevoLayout.setVerticalGroup(
         jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -438,7 +452,7 @@ public class EventoFrame extends javax.swing.JDialog {
             .addGroup(jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                 .addComponent(jLabelEventoFecha)
                 .addComponent(dateChooserComboFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGap(16, 16, 16)
             .addGroup(jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabelEventoHora)
                 .addComponent(jSpinnerHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -446,6 +460,10 @@ public class EventoFrame extends javax.swing.JDialog {
                 .addComponent(jSpinnerMinutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jLabelCantidadEntradas)
                 .addComponent(jSpinnerCantidaAsientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGroup(jPanelContenidoEventoNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jSpinnerPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelPrecio))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jButtonEventoAccion)
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -489,7 +507,7 @@ public class EventoFrame extends javax.swing.JDialog {
             
             //Si es nuevo Evento
             if (this.evento.getCodigo() < 0) {
-                new DAO.ImplEventoDAO().AgregarNuevoEvento(evento);
+                new DAO.ImplEventoDAO().AgregarNuevoEvento(evento, (Integer)jSpinnerCantidaAsientos.getValue(), (Integer)jSpinnerPrecio.getValue());
                 JOptionPane.showMessageDialog(this,
                     "Evento agregado exitosamente",
                     "Agregado",
@@ -597,6 +615,7 @@ public class EventoFrame extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelEventoNombre;
     private javax.swing.JLabel jLabelEventoRecinto;
     private javax.swing.JLabel jLabelEventoTipo;
+    private javax.swing.JLabel jLabelPrecio;
     private javax.swing.JList<String> jListTiposEventos;
     private javax.swing.JPanel jPanelContenidoEventoNuevo;
     private javax.swing.JPanel jPanelContenidoReicnto;
@@ -608,6 +627,7 @@ public class EventoFrame extends javax.swing.JDialog {
     private javax.swing.JSpinner jSpinnerCantidaAsientos;
     private javax.swing.JSpinner jSpinnerHora;
     private javax.swing.JSpinner jSpinnerMinutos;
+    private javax.swing.JSpinner jSpinnerPrecio;
     private javax.swing.JTable jTableRecintos;
     private javax.swing.JTextField jTextFieldBuscarRecinto;
     private javax.swing.JTextField jTextFieldBuscarTipoEvento;

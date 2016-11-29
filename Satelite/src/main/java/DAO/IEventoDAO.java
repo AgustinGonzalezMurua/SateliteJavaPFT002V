@@ -10,7 +10,7 @@ package DAO;
  * @author Agus
  */
 public interface IEventoDAO extends IBaseDAO{
-    public void AgregarNuevoEvento(DTO.Evento evento);
+    public void AgregarNuevoEvento(DTO.Evento evento, int cantidad, int precio);
     public void ModificarEvento(DTO.Evento evento);
     public void EliminarEvento(DTO.Evento evento);
 }

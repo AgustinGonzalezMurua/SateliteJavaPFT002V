@@ -16,9 +16,9 @@ import org.json.simple.JSONObject;
 public class ImplEventoDAO implements IEventoDAO{
 
     @Override
-    public void AgregarNuevoEvento(Evento evento) {
+    public void AgregarNuevoEvento(Evento evento, int cantidadAsientosAOcupar, int  precio) {
         try {
-            JSONObject _resultado = (JSONObject)JSONPARSER.parse(SERVICIO.registrarEvento(evento.toJSONString()));
+            JSONObject _resultado = (JSONObject)JSONPARSER.parse(SERVICIO.registrarEvento(evento.toJSONString(),cantidadAsientosAOcupar, precio));
             if (_resultado.containsKey("Error")) {
                 throw new ServiceError(_resultado.get("Error").toString());
             }
