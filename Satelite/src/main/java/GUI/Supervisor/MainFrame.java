@@ -294,7 +294,6 @@ dateChooserComboFechaDesde.setMaxDate(Calendar.getInstance()
            
            _ventas.forEach((_venta) -> {
                ((Util.jTableCustom.Models.jTableModelVenta)jTable1.getModel()).cargarDatos(_venta);
-               j
             });
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error",  ERROR);
