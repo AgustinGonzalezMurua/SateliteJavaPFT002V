@@ -76,10 +76,10 @@ public class Usuario {
     public String toString() {
         return "{"
                 + "\"RUN\" : \"" + RUN + "\","
-                + "\"tipo\" : \"" + Tipo + "\","
-                + "\"Nombre\" : \"" + Nombre + "\"" 
-                + "\"Fono\" : \"" + Fono + "\""
-                + "\"Correo\" : \"" + Email + "\"" 
+                + "\"Tipo\" : \"" + Tipo + "\","
+                + "\"Nombre\" : \"" + Nombre + "\"," 
+                + "\"Fono\" : \"" + Fono + "\","
+                + "\"Correo\" : \"" + Email + "\"," 
                 + "\"Estado\" : \"" + Estado + "\"" 
                 +'}';
     }
