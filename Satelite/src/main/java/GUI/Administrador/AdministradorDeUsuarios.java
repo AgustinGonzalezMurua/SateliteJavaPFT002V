@@ -5,6 +5,8 @@
  */
 package GUI.Administrador;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author emmanuel.padilla
@@ -33,8 +35,8 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
         jPanelContenido = new javax.swing.JPanel();
         jLabelEmail = new javax.swing.JLabel();
         jTextFieldEmail = new javax.swing.JTextField();
-        jLabelNombreOrganizador = new javax.swing.JLabel();
-        jTextFieldNombreOrganizador = new javax.swing.JTextField();
+        jLabelNombre = new javax.swing.JLabel();
+        jTextFieldNombre = new javax.swing.JTextField();
         jLabelRun = new javax.swing.JLabel();
         jTextFieldRun = new javax.swing.JTextField();
         jLabelContraseña = new javax.swing.JLabel();
@@ -49,7 +51,7 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
 
         jLabelEmail.setText("E-mail");
 
-        jLabelNombreOrganizador.setText("Nombre de Usuario");
+        jLabelNombre.setText("Nombre de Usuario");
 
         jLabelRun.setText("Run");
 
@@ -60,6 +62,11 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
         jLabelTipoUsuario.setText("Tipo de Usuario");
 
         jButtonCrearUsuario.setText("Crear Usuario");
+        jButtonCrearUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCrearUsuarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelContenidoLayout = new javax.swing.GroupLayout(jPanelContenido);
         jPanelContenido.setLayout(jPanelContenidoLayout);
@@ -71,8 +78,8 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
                         .addGroup(jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jTextFieldEmail, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabelNombreOrganizador, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextFieldNombreOrganizador, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabelNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jTextFieldNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabelEmail))
                         .addGap(18, 18, 18)
                         .addGroup(jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -92,11 +99,11 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
             .addGroup(jPanelContenidoLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNombreOrganizador)
+                    .addComponent(jLabelNombre)
                     .addComponent(jLabelRun))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldNombreOrganizador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldRun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -134,6 +141,29 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearUsuarioActionPerformed
+        DTO.Usuario usu = new DTO.Usuario();
+        usu.setNombre(jTextFieldNombre.getText());
+        usu.setRUN(jTextFieldRun.getText());
+        usu.setEmail(jTextFieldEmail.getText());
+        usu.setTipo(jComboBoxTipoUsuario.getSelectedIndex());
+        
+        
+        try {
+            new DAO.ImplUsuarioDAO().CrearUsuario(usu, jTextFieldContraseña.getText());
+            JOptionPane.showMessageDialog(this,
+                "Usuario agregado exitosamente",
+                "Agregado",
+                JOptionPane.PLAIN_MESSAGE);
+   
+        } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,
+                "No se pudo agregar usuario" +e.getMessage(),
+                "Error",
+                JOptionPane.PLAIN_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonCrearUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,14 +212,14 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxTipoUsuario;
     private javax.swing.JLabel jLabelContraseña;
     private javax.swing.JLabel jLabelEmail;
-    private javax.swing.JLabel jLabelNombreOrganizador;
+    private javax.swing.JLabel jLabelNombre;
     private javax.swing.JLabel jLabelRun;
     private javax.swing.JLabel jLabelTipoUsuario;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanelContenido;
     private javax.swing.JTextField jTextFieldContraseña;
     private javax.swing.JTextField jTextFieldEmail;
-    private javax.swing.JTextField jTextFieldNombreOrganizador;
+    private javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextField jTextFieldRun;
     // End of variables declaration//GEN-END:variables
 }

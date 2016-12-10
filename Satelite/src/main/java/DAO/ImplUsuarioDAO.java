@@ -38,10 +38,11 @@ public class ImplUsuarioDAO implements IUsuarioDAO {
         }
     }
 
-    public void CrearUsuario(Usuario usuario) {
+    public void CrearUsuario(Usuario usuario, String contrasena) {
 
         try {
-          JSONObject _resultado = (JSONObject)JSONPARSER.parse(SERVICIO.registrarUsuarioDesdeAdmin(usuario.toJSONString()));
+          JSONObject _resultado = 
+                  (JSONObject)JSONPARSER.parse(SERVICIO.registrarUsuarioDesdeAdmin(usuario.toJSONString(), MD5(contrasena)));
           if(_resultado.containsKey("Error")){
                 throw new ServiceError("Ha ocurrido un error: " + _resultado.get("Error").toString());              
           }  
