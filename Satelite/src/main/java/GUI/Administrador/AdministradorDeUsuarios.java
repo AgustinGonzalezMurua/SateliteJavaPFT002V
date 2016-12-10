@@ -147,7 +147,7 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
         usu.setNombre(jTextFieldNombre.getText());
         usu.setRUN(jTextFieldRun.getText());
         usu.setEmail(jTextFieldEmail.getText());
-        usu.setTipo(jComboBoxTipoUsuario.getSelectedIndex());
+        usu.setTipo(jComboBoxTipoUsuario.getSelectedIndex()+1);        
         
         
         try {
