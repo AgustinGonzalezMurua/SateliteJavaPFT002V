@@ -43,7 +43,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabelNombreUsuario = new javax.swing.JLabel();
         jSeparatorDespliegueContenido = new javax.swing.JSeparator();
         jPanelContenido = new javax.swing.JPanel();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuInicio = new javax.swing.JMenuBar();
         jMenuAdministrador = new javax.swing.JMenu();
         jMenuItemCrearUsuarios = new javax.swing.JMenuItem();
         jMenuItemListarUsuarios = new javax.swing.JCheckBoxMenuItem();
@@ -105,12 +105,12 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jMenuAdministrador.add(jMenuItemListarUsuarios);
 
-        jMenuBar1.add(jMenuAdministrador);
+        jMenuInicio.add(jMenuAdministrador);
 
         jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        jMenuInicio.add(jMenu2);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(jMenuInicio);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -191,7 +191,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelNombreUsuario;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenuAdministrador;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuInicio;
     private javax.swing.JMenuItem jMenuItemCrearUsuarios;
     private javax.swing.JCheckBoxMenuItem jMenuItemListarUsuarios;
     private javax.swing.JPanel jPanelContenido;

@@ -37,13 +37,13 @@ public class ListarUsuarios extends javax.swing.JDialog {
         
     }
     private void refrescarListaUsuarios() {
-       ((Util.jTableModels.jTableModelUsuarios)jTableUsuariosListar.getModel()).removerDatos();
+       ((Util.jTableCustom.Models.jTableModelUsuarios)jTableUsuariosListar.getModel()).removerDatos();
        
        this.usuarios = new DAO.ImplUsuarioDAO().RecuperarUsuario_Todos();
        usuarios.forEach((usuarios) -> {
-           ((Util.jTableModels.jTableModelUsuarios)jTableUsuariosListar.getModel()).cargarDatos(usuarios);
+           ((Util.jTableCustom.Models.jTableModelUsuarios)jTableUsuariosListar.getModel()).cargarDatos(usuarios);
        } );
-       ((Util.jTableModels.jTableModelUsuarios)this.jTableUsuariosListar.getModel()).isCellEditable(0, 0);
+       ((Util.jTableCustom.Models.jTableModelUsuarios)this.jTableUsuariosListar.getModel()).isCellEditable(0, 0);
     }
       
     /**
@@ -122,7 +122,7 @@ public class ListarUsuarios extends javax.swing.JDialog {
 
         jLabel3.setText("Listado de usuarios");
 
-        jTableUsuariosListar.setModel(new Util.jTableModels.jTableModelUsuarios());
+        jTableUsuariosListar.setModel(new Util.jTableCustom.Models.jTableModelUsuarios());
         jScrollPane2.setViewportView(jTableUsuariosListar);
 
         javax.swing.GroupLayout jPanelCuerpo1Layout = new javax.swing.GroupLayout(jPanelCuerpo1);
@@ -329,9 +329,9 @@ public class ListarUsuarios extends javax.swing.JDialog {
         txtTelefono.setText("");
     }
         
-    public void limpiarTabla(Util.jTableModels.jTableModelUsuarios tabla){
+    public void limpiarTabla(Util.jTableCustom.Models.jTableModelUsuarios tabla){
         try {
-            DefaultTableModel modelo=(DefaultTableModel) (Util.jTableModels.jTableModelUsuarios)jTableUsuariosListar.getModel();
+            DefaultTableModel modelo=(DefaultTableModel) (Util.jTableCustom.Models.jTableModelUsuarios)jTableUsuariosListar.getModel();
             int filas=tabla.getRowCount();
             for (int i = 0;filas>i; i++) {
                 modelo.removeRow(0);
@@ -362,14 +362,14 @@ public class ListarUsuarios extends javax.swing.JDialog {
     }//GEN-LAST:event_btnEliminarUsuarioActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        limpiarTabla((Util.jTableModels.jTableModelUsuarios)jTableUsuariosListar.getModel());
+        limpiarTabla((Util.jTableCustom.Models.jTableModelUsuarios)jTableUsuariosListar.getModel());
         try {
             String b= txtRut.getText(); 
            // this.usuarios = new DAO.ImplUsuarioDAO().RecuperarUsuario_Todos();
             this.usuario = new DAO.ImplUsuarioDAO().ObtenerUsuario(b);
       
             
-                ((Util.jTableModels.jTableModelUsuarios)jTableUsuariosListar.getModel()).cargarDatos(usuario);
+                ((Util.jTableCustom.Models.jTableModelUsuarios)jTableUsuariosListar.getModel()).cargarDatos(usuario);
                     txtNombre.setText(usuario.getNombre());
                     txtCorreo.setText(usuario.getEmail());
                     txtTelefono.setText(Integer.toString(usuario.getFono()));
@@ -389,7 +389,7 @@ public class ListarUsuarios extends javax.swing.JDialog {
 
     private void btnLimpiarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarDatosActionPerformed
        limpiar();
-        limpiarTabla((Util.jTableModels.jTableModelUsuarios)jTableUsuariosListar.getModel());
+        limpiarTabla((Util.jTableCustom.Models.jTableModelUsuarios)jTableUsuariosListar.getModel());
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLimpiarDatosActionPerformed

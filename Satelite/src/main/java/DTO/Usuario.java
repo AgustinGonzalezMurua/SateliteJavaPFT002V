@@ -1,6 +1,6 @@
 package DTO;
 
-import javax.swing.JTable;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
@@ -83,6 +83,7 @@ public class Usuario {
                 + "\"Estado\" : \"" + Estado + "\"" 
                 +'}';
     }
+    
     
 public String toJSONString(){
         return org.json.simple.JSONValue.toJSONString(this);

@@ -54,7 +54,6 @@ public class ImplUsuarioDAO implements IUsuarioDAO {
  
     }
 
-
     @Override
     public Usuario ObtenerUsuario(String RUN) {
         Usuario _usuario = new Usuario();
@@ -68,6 +67,8 @@ public class ImplUsuarioDAO implements IUsuarioDAO {
                 _usuario.setRUN(RUN);
                 _usuario.setTipo(Integer.parseInt(_resultado.get("Tipo").toString()));
                 _usuario.setNombre(_resultado.get("Nombre").toString());
+                _usuario.setEmail(_resultado.get("Email").toString());
+                _usuario.setFono(Integer.parseInt(_resultado.get("Fono").toString()));
             }
             return _usuario;
             
@@ -112,6 +113,18 @@ public class ImplUsuarioDAO implements IUsuarioDAO {
         }
     }
     
+    public void ModificarUsuario(Usuario usuario){
+        String var = usuario.toJSONString();
+        try{
+            JSONObject _resultado = (JSONObject)JSONPARSER.parse(SERVICIO.modificarUsuario(usuario.toJSONString()));
+            if (ContieneErrores(_resultado)) {
+                throw new ServiceError("Ha ocurrido un error al modificar el usuario:" + _resultado.get("Error").toString());
+            }
+        } catch (Exception e){
+            throw new IllegalArgumentException(e.getMessage());
+        }
+    }
+    
     public void Eliminar_Usuario(Usuario usuario) {
         try{
             JSONObject _resultado = (JSONObject)JSONPARSER.parse(SERVICIO.eliminarUsuario(String.valueOf(usuario.getRUN())));
@@ -135,6 +148,5 @@ public class ImplUsuarioDAO implements IUsuarioDAO {
         }
     }
 
-   
-   
+ 
 }
