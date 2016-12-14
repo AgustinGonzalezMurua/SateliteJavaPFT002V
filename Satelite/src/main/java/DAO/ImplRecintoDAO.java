@@ -8,6 +8,7 @@ package DAO;
 import static DAO.IBaseDAO.JSONPARSER;
 import static DAO.IBaseDAO.SERVICIO;
 import DTO.Recinto;
+import DTO.Ubicacion;
 import Exceptions.ServiceError;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -53,5 +54,35 @@ public class ImplRecintoDAO implements IRecintoDAO {
         }else{
             return true;
         }
+    }   
+        public void CrearUbicacion(Ubicacion ubicacion, int codigo, char fila, int recinto) {
+
+        try {
+          JSONObject _resultado = 
+                  (JSONObject)JSONPARSER.parse(SERVICIO.registrarUbicacion(ubicacion.toJSONString(), codigo, codigo, recinto));
+          if(_resultado.containsKey("Error")){
+                throw new ServiceError("Ha ocurrido un error: " + _resultado.get("Error").toString());              
+          }  
+           
+        } catch (Exception e) {
+                        throw new IllegalArgumentException(e.getMessage());
+  
+        }
+    }
+        public void CrearRecinto(Recinto recinto) {
+
+        try {
+          JSONObject _resultado = 
+                  (JSONObject)JSONPARSER.parse(SERVICIO.registrarRecinto(recinto.toJSONString()));
+          if(_resultado.containsKey("Error")){
+                throw new ServiceError("Ha ocurrido un error: " + _resultado.get("Error").toString());              
+          }  
+           
+        } catch (Exception e) {
+                        throw new IllegalArgumentException(e.getMessage());
+  
+        }
+ 
     }
 }
+

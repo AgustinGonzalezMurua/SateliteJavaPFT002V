@@ -5,19 +5,24 @@
  */
 package DTO;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
+
 /**
  *
- * @author Agus
+ * @author AgusNuel
  */
 public class Ubicacion {
     private int Codigo;
-    private int Numero;
-    private int Fila;
-    private boolean Habilitado;
+    private char Fila; 
+    private int Recinto;
 
-    public Ubicacion() {
+    public Ubicacion(JSONObject json) throws ParseException, java.text.ParseException {
+        this.Codigo = Integer.parseInt(json.get("Codigo").toString());
+        this.Fila = json.get("Fila").toString().charAt(0);
+        this.Recinto = Integer.parseInt(json.get("Recinto").toString());
     }
-
+    
     public int getCodigo() {
         return Codigo;
     }
@@ -26,39 +31,34 @@ public class Ubicacion {
         this.Codigo = Codigo;
     }
 
-    public int getNumero() {
-        return Numero;
-    }
-
-    public void setNumero(int Numero) {
-        this.Numero = Numero;
-    }
-
-    public int getFila() {
+    public char getFila() {
         return Fila;
     }
 
-    public void setFila(int Fila) {
+    public void setFila(char Fila) {
         this.Fila = Fila;
     }
-
-    public boolean isHabilitado() {
-        return Habilitado;
+    
+    public int getRecinto() {
+        return Recinto;
     }
 
-    public void setHabilitado(boolean Habilitado) {
-        this.Habilitado = Habilitado;
+    public void setRecinto(int Recinto) {
+        this.Recinto = Recinto;
     }
-
+    
     @Override
     public String toString() {
         return "{"
-                + "\"Codigo\" : \"" + Codigo + "\","
-                + "\"Numero\" : \"" + Numero + "\","
-                + "\"Fila\" : \"" + Fila + "\","
-                + "\"Habilitado\" : \"" + Habilitado + "\""
+                + "\"Codigo\" : \"" + Codigo + "\","                
+                + "\"Fila\" : \"" + Fila + "\","   
+                + "\"Recinto\" : \"" + Recinto + "\""  
                 + '}';
     }
     
+    public String toJSONString(){
+        return org.json.simple.JSONValue.toJSONString(this);
+    }
+
     
 }

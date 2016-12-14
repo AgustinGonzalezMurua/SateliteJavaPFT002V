@@ -26,7 +26,7 @@ public class Recinto {
     public Recinto() {
     }
 
-    public Recinto(JSONObject json) throws ParseException {
+    public Recinto(JSONObject json)throws ParseException, java.text.ParseException {
         this.Codigo             = Integer.parseInt(json.get("Codigo").toString());
         this.Nombre             = json.get("Nombre").toString();
         this.Direccion          = json.get("Direccion").toString();
@@ -110,7 +110,11 @@ public class Recinto {
                 + "\"Comuna\" : " + Comuna + ","
                 + "\"CapacidadMaxima\" : \"" + CapacidadMaxima + "\","
                 + "\"Fono\" : \"" + Fono + "\","
-                + "\"Ubicaciones\" : \"" + Ubicaciones + "\""
+                + "\"Ubicaciones\" : \"" + Ubicaciones.toString() + "\""
                 + '}';
+    }
+    
+     public String toJSONString(){
+        return org.json.simple.JSONValue.toJSONString(this);
     }
 }
