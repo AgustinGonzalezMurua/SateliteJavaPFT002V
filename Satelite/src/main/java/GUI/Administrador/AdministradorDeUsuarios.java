@@ -59,6 +59,7 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
         btnBuscar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableUsuariosListar = new javax.swing.JTable();
         btnListarUsuarios = new javax.swing.JButton();
@@ -74,7 +75,7 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
         jPanelCabezera.setLayout(jPanelCabezeraLayout);
         jPanelCabezeraLayout.setHorizontalGroup(
             jPanelCabezeraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
         );
         jPanelCabezeraLayout.setVerticalGroup(
             jPanelCabezeraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,6 +127,13 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
             }
         });
 
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelContenidoLayout = new javax.swing.GroupLayout(jPanelContenido);
         jPanelContenido.setLayout(jPanelContenidoLayout);
         jPanelContenidoLayout.setHorizontalGroup(
@@ -163,8 +171,10 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnModificar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEliminar)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                        .addComponent(btnEliminar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLimpiar)))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanelContenidoLayout.setVerticalGroup(
             jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,7 +204,8 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
                     .addComponent(btnCrear)
                     .addComponent(btnBuscar)
                     .addComponent(btnModificar)
-                    .addComponent(btnEliminar))
+                    .addComponent(btnEliminar)
+                    .addComponent(btnLimpiar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -217,10 +228,10 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnListarUsuarios)
-                    .addComponent(jPanelCabezera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelCabezera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanelContenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,7 +244,7 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnListarUsuarios)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
         pack();
@@ -271,6 +282,7 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
             usu = new DAO.ImplUsuarioDAO().ObtenerUsuario(txtRut.getText());
             txtNombre.setText(usu.getNombre());
             txtRut.setEnabled(false);
+            txtContraseña.setEnabled(false);
             txtRut.setText(usu.getRUN());
             txtEmail.setText(usu.getEmail());
             Integer fono = usu.getFono();
@@ -341,11 +353,18 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
          limpiar();
         this.refrescarListaUsuarios();
     }//GEN-LAST:event_btnListarUsuariosActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        limpiar();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
      private void limpiar(){
+        txtRut.setEnabled(true);
+        txtContraseña.setEnabled(true);
         txtRut.setText("");  
         txtNombre.setText("");
         txtEmail.setText("");
         txtTelefono.setText("");
+        txtContraseña.setText("");
     }
       private void refrescarListaUsuarios() {
        ((Util.jTableCustom.Models.jTableModelUsuarios)jTableUsuariosListar.getModel()).removerDatos();
@@ -421,6 +440,7 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnListarUsuarios;
     private javax.swing.JButton btnModificar;
     private javax.swing.JComboBox<String> cmbTipoUsuario;

@@ -47,6 +47,7 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuAdministrador = new javax.swing.JMenu();
         jMenuItemCrearUsuarios = new javax.swing.JMenuItem();
         jMenuItemListarUsuarios = new javax.swing.JCheckBoxMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -105,6 +106,14 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jMenuAdministrador.add(jMenuItemListarUsuarios);
 
+        jMenuItem1.setText("Administrar Recintos");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenuAdministrador.add(jMenuItem1);
+
         jMenuInicio.add(jMenuAdministrador);
 
         jMenu2.setText("Edit");
@@ -151,6 +160,12 @@ public class MainFrame extends javax.swing.JFrame {
         ListarUsuarios.setVisible(true);
     }//GEN-LAST:event_jMenuItemListarUsuariosActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        GUI.Administrador.AdministradorDeRecintos CrearRecintos = new GUI.Administrador.AdministradorDeRecintos();
+        
+        CrearRecintos.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
 //    /**
 //     * @param args the command line arguments
 //     */
@@ -192,6 +207,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenuAdministrador;
     private javax.swing.JMenuBar jMenuInicio;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemCrearUsuarios;
     private javax.swing.JCheckBoxMenuItem jMenuItemListarUsuarios;
     private javax.swing.JPanel jPanelContenido;

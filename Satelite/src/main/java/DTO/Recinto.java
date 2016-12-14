@@ -20,7 +20,7 @@ public class Recinto {
     private String Direccion;
     private Comuna Comuna;
     private int CapacidadMaxima;
-    private String Fono;
+    private int Fono;
     private ArrayList<Ubicacion> Ubicaciones;
 
     public Recinto() {
@@ -32,7 +32,7 @@ public class Recinto {
         this.Direccion          = json.get("Direccion").toString();
         this.Comuna             = new Comuna((JSONObject) new JSONParser().parse(json.get("Comuna").toString()));
         this.CapacidadMaxima    = Integer.parseInt(json.get("CapacidadMaxima").toString());
-        this.Fono               = json.get("Fono").toString();
+        this.Fono               = Integer.parseInt(json.get("Fono").toString());
     }
 
     
@@ -69,11 +69,11 @@ public class Recinto {
         this.CapacidadMaxima = CapacidadMaxima;
     }
 
-    public String getFono() {
+    public int getFono() {
         return Fono;
     }
 
-    public void setFono(String Fono) {
+    public void setFono(int Fono) {
         this.Fono = Fono;
     }
 

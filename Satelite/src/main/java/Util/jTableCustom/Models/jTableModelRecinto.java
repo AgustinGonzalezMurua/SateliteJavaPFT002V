@@ -5,7 +5,7 @@
  */
 package Util.jTableCustom.Models;
 
-import java.text.SimpleDateFormat;
+
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -30,8 +30,9 @@ public class jTableModelRecinto extends DefaultTableModel{
         this.addColumn("Nombre");
         this.addColumn("Dirección");
         this.addColumn("Comuna");
-        this.addColumn("Capacidad Máxima");
         this.addColumn("Teléfono");
+        this.addColumn("Capacidad Máxima");
+        
     }
     
     public void cargarDatos(DTO.Recinto recinto) {
@@ -40,13 +41,23 @@ public class jTableModelRecinto extends DefaultTableModel{
             ,recinto.getNombre()
             ,recinto.getDireccion()
             ,recinto.getComuna().getNombre()
-            ,recinto.getCapacidadMaxima()
             ,recinto.getFono()
+            ,recinto.getCapacidadMaxima()
+            
         });
     }
     
-    @Override
-    public boolean isCellEditable(int row, int column){
-        return Editable;
-    }
+    public boolean[] editable = new boolean[]{
+        false
+        ,true
+        ,true
+    };
+    
+        @Override
+       public boolean isCellEditable(int row, int column){
+        return editable[column];
+    } 
+      public void removerDatos(){
+        this.setRowCount(0);
+    }     
 }

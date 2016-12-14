@@ -5,6 +5,10 @@
  */
 package GUI.Administrador;
 
+import DTO.Recinto;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 
 
 /**
@@ -18,7 +22,8 @@ public class AdministradorDeRecintos extends javax.swing.JFrame {
      */
     
     private DTO.Usuario usuario;
-  
+    private ArrayList<Recinto> recintos;
+    
     public AdministradorDeRecintos() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -48,6 +53,15 @@ public class AdministradorDeRecintos extends javax.swing.JFrame {
         jLabelNombreUsuario = new javax.swing.JLabel();
         jLabelTitulo = new javax.swing.JLabel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
+        pnlUbicacion = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtcodigoUbicacion = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        btnCrearUbicacion = new javax.swing.JButton();
         pnlRecinto = new javax.swing.JPanel();
         jLabelNombre = new javax.swing.JLabel();
         txtNombreRecinto = new javax.swing.JTextField();
@@ -65,15 +79,10 @@ public class AdministradorDeRecintos extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         jLabelCodigo = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
-        pnlUbicacion = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txtcodigoUbicacion = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
-        btnCrearUbicacion = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableRecintosListar = new javax.swing.JTable();
+        btnListarRecintos = new javax.swing.JButton();
         btnRecinto = new javax.swing.JButton();
         btnUbicacion = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -111,6 +120,64 @@ public class AdministradorDeRecintos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelTitulo)
                 .addContainerGap())
+        );
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setText("Registro de Ubicaciones");
+
+        jLabel2.setText("Código");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" }));
+
+        jLabel3.setText("Fila");
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel4.setText("Recinto");
+
+        btnCrearUbicacion.setText("Crear");
+
+        javax.swing.GroupLayout pnlUbicacionLayout = new javax.swing.GroupLayout(pnlUbicacion);
+        pnlUbicacion.setLayout(pnlUbicacionLayout);
+        pnlUbicacionLayout.setHorizontalGroup(
+            pnlUbicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlUbicacionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlUbicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(pnlUbicacionLayout.createSequentialGroup()
+                        .addGroup(pnlUbicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtcodigoUbicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(28, 28, 28)
+                        .addGroup(pnlUbicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlUbicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)))
+                    .addComponent(btnCrearUbicacion))
+                .addContainerGap(211, Short.MAX_VALUE))
+        );
+        pnlUbicacionLayout.setVerticalGroup(
+            pnlUbicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlUbicacionLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlUbicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlUbicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtcodigoUbicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCrearUbicacion)
+                .addContainerGap(212, Short.MAX_VALUE))
         );
 
         jLabelNombre.setText("Nombre Recinto");
@@ -155,50 +222,71 @@ public class AdministradorDeRecintos extends javax.swing.JFrame {
 
         jLabelCodigo.setText("Codigo");
 
-        txtCodigo.setEditable(false);
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+
+        jTableRecintosListar.setModel(new Util.jTableCustom.Models.jTableModelRecinto());
+        jScrollPane1.setViewportView(jTableRecintosListar);
+
+        btnListarRecintos.setText("Listar Recintos");
+        btnListarRecintos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarRecintosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlRecintoLayout = new javax.swing.GroupLayout(pnlRecinto);
         pnlRecinto.setLayout(pnlRecintoLayout);
         pnlRecintoLayout.setHorizontalGroup(
             pnlRecintoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlRecintoLayout.createSequentialGroup()
-                .addGroup(pnlRecintoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(pnlRecintoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlRecintoLayout.createSequentialGroup()
-                        .addGroup(pnlRecintoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelCodigo)
-                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldRun, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlRecintoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelComuna)
-                            .addGroup(pnlRecintoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(pnlRecintoLayout.createSequentialGroup()
-                                    .addComponent(cmbComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtCapacidadMaxima))
-                                .addGroup(pnlRecintoLayout.createSequentialGroup()
-                                    .addGroup(pnlRecintoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtNombreRecinto, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabelNombre))
-                                    .addGroup(pnlRecintoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlRecintoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(pnlRecintoLayout.createSequentialGroup()
+                                .addGroup(pnlRecintoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelCodigo)
+                                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldRun, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(pnlRecintoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelComuna)
+                                    .addGroup(pnlRecintoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addGroup(pnlRecintoLayout.createSequentialGroup()
-                                            .addGap(11, 11, 11)
-                                            .addComponent(jLabelFono))
-                                        .addGroup(pnlRecintoLayout.createSequentialGroup()
+                                            .addComponent(cmbComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(txtCapacidadMaxima))
+                                        .addGroup(pnlRecintoLayout.createSequentialGroup()
                                             .addGroup(pnlRecintoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabelCapacidadMaxima)
-                                                .addComponent(txtFono, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
-                    .addGroup(pnlRecintoLayout.createSequentialGroup()
-                        .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtNombreRecinto, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jLabelNombre))
+                                            .addGroup(pnlRecintoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(pnlRecintoLayout.createSequentialGroup()
+                                                    .addGap(11, 11, 11)
+                                                    .addComponent(jLabelFono))
+                                                .addGroup(pnlRecintoLayout.createSequentialGroup()
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addGroup(pnlRecintoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jLabelCapacidadMaxima)
+                                                        .addComponent(txtFono, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+                            .addGroup(pnlRecintoLayout.createSequentialGroup()
+                                .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnModificar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnModificar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                        .addComponent(btnLimpiar))
+                    .addComponent(btnListarRecintos)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlRecintoLayout.setVerticalGroup(
             pnlRecintoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,66 +316,13 @@ public class AdministradorDeRecintos extends javax.swing.JFrame {
                     .addComponent(btnCrear)
                     .addComponent(btnBuscar)
                     .addComponent(btnModificar)
-                    .addComponent(btnEliminar))
-                .addContainerGap(28, Short.MAX_VALUE))
-        );
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Registro de Ubicaciones");
-
-        jLabel2.setText("Código");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" }));
-
-        jLabel3.setText("Fila");
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel4.setText("Recinto");
-
-        btnCrearUbicacion.setText("Crear");
-
-        javax.swing.GroupLayout pnlUbicacionLayout = new javax.swing.GroupLayout(pnlUbicacion);
-        pnlUbicacion.setLayout(pnlUbicacionLayout);
-        pnlUbicacionLayout.setHorizontalGroup(
-            pnlUbicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlUbicacionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlUbicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(pnlUbicacionLayout.createSequentialGroup()
-                        .addGroup(pnlUbicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtcodigoUbicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(28, 28, 28)
-                        .addGroup(pnlUbicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlUbicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)))
-                    .addComponent(btnCrearUbicacion))
-                .addContainerGap(85, Short.MAX_VALUE))
-        );
-        pnlUbicacionLayout.setVerticalGroup(
-            pnlUbicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlUbicacionLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlUbicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlUbicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtcodigoUbicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCrearUbicacion)
-                .addContainerGap(61, Short.MAX_VALUE))
+                    .addComponent(btnEliminar)
+                    .addComponent(btnLimpiar))
+                .addGap(18, 18, 18)
+                .addComponent(btnListarRecintos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
         );
 
         btnRecinto.setText("Administrar Recinto");
@@ -304,8 +339,8 @@ public class AdministradorDeRecintos extends javax.swing.JFrame {
             }
         });
 
-        jLayeredPane1.setLayer(pnlRecinto, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(pnlUbicacion, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(pnlRecinto, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(btnRecinto, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(btnUbicacion, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -315,15 +350,13 @@ public class AdministradorDeRecintos extends javax.swing.JFrame {
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnRecinto)
-                .addGap(40, 40, 40)
-                .addComponent(btnUbicacion)
-                .addContainerGap(282, Short.MAX_VALUE))
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(pnlRecinto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addComponent(btnRecinto)
+                        .addGap(40, 40, 40)
+                        .addComponent(btnUbicacion))
+                    .addComponent(pnlRecinto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -333,21 +366,18 @@ public class AdministradorDeRecintos extends javax.swing.JFrame {
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                .addContainerGap(223, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(pnlRecinto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRecinto)
                     .addComponent(btnUbicacion))
                 .addGap(43, 43, 43))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(pnlRecinto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(77, Short.MAX_VALUE)))
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addGap(12, 12, 12)
                     .addComponent(pnlUbicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(77, Short.MAX_VALUE)))
+                    .addContainerGap(122, Short.MAX_VALUE)))
         );
 
         setJMenuBar(jMenuBar1);
@@ -370,30 +400,115 @@ public class AdministradorDeRecintos extends javax.swing.JFrame {
                 .addComponent(jPanelCabezera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(375, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        
-
+        DTO.Recinto recinto = new DTO.Recinto();
+        DTO.Comuna comuna = new DTO.Comuna();
+        try {
+            recinto.setNombre(txtNombreRecinto.getText());
+            recinto.setFono(Integer.parseInt(txtFono.getText()));
+            recinto.setDireccion(txtDireccion.getText());
+            comuna.setCodigo(cmbComuna.getSelectedIndex());
+            comuna.setNombre(cmbComuna.getName());            
+            recinto.setComuna(comuna);
+            recinto.setCapacidadMaxima(Integer.parseInt(txtCapacidadMaxima.getText()));
+                   
+            new DAO.ImplRecintoDAO().ModificarRecinto(recinto);
+            
+            JOptionPane.showMessageDialog(this,
+                "Recinto modificado con exito",
+                "Éxito",
+                JOptionPane.PLAIN_MESSAGE);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                "No se puedo modificar el recinto" + e.getMessage(),
+                "Error",
+                JOptionPane.PLAIN_MESSAGE);
+        }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-       
-
+        DTO.Recinto recinto = new DTO.Recinto();
+        DTO.Comuna comuna = new DTO.Comuna();
+        try {
+            
+            Integer codigo = recinto.getCodigo();
+            txtCodigo.setText(codigo.toString());
+            txtNombreRecinto.setText(recinto.getNombre());
+            txtDireccion.setText(recinto.getDireccion());
+            cmbComuna.setSelectedIndex(comuna.getCodigo()); //PENDIENTE
+            Integer fono = recinto.getFono();
+            txtFono.setText(fono.toString());
+            Integer capacidadMaxima = recinto.getCapacidadMaxima();
+            txtCapacidadMaxima.setText(capacidadMaxima.toString());
+                               
+            new DAO.ImplRecintoDAO().ModificarRecinto(recinto);
+            
+            JOptionPane.showMessageDialog(this,
+                "Datos de recinto cargados con exito",
+                "Éxito",
+                JOptionPane.PLAIN_MESSAGE);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                "No se puedieron cargar los datos del recinto" + e.getMessage(),
+                "Error",
+                JOptionPane.PLAIN_MESSAGE);
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-        
+        DTO.Recinto recinto = new DTO.Recinto();
+        DTO.Comuna comuna = new DTO.Comuna();
+        try {
+            recinto.setNombre(txtNombreRecinto.getText());            
+            recinto.setFono(Integer.parseInt(txtFono.getText()));
+            recinto.setDireccion(txtDireccion.getText());
+            comuna.setCodigo(cmbComuna.getSelectedIndex()+1);
+            comuna.setNombre(cmbComuna.getName());
+            recinto.setComuna(comuna);
+            recinto.setCapacidadMaxima(Integer.parseInt(txtCapacidadMaxima.getText()));
+                   
+            new DAO.ImplRecintoDAO().CrearRecinto(recinto);
+            
+            JOptionPane.showMessageDialog(this,
+                "Recinto agregado exitosamente",
+                "Éxito",
+                JOptionPane.PLAIN_MESSAGE);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                "No se registrar el recinto" + e.getMessage(),
+                "Error",
+                JOptionPane.PLAIN_MESSAGE);
+        }
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-       
-    }//GEN-LAST:event_btnEliminarActionPerformed
+       DTO.Recinto recinto = new DTO.Recinto();
+        recinto.setCodigo(Integer.parseInt(txtCodigo.getText()));
+ 
+        try {
+            new DAO.ImplRecintoDAO().EliminarRecinto(recinto);
+            JOptionPane.showMessageDialog(this,
+                "Recinto eliminado exitosamente",
+                "Eliminado",
+                JOptionPane.PLAIN_MESSAGE);
 
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                "No se pudo eliminar el recinto" +e.getMessage(),
+                "Error",
+                JOptionPane.PLAIN_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+    
     private void btnRecintoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecintoActionPerformed
         pnlRecinto.setVisible(true);
         pnlUbicacion.setVisible(false);
@@ -403,7 +518,30 @@ public class AdministradorDeRecintos extends javax.swing.JFrame {
         pnlUbicacion.setVisible(true);
         pnlRecinto.setVisible(false);
     }//GEN-LAST:event_btnUbicacionActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        txtCodigo.setText("");
+        txtNombreRecinto.setText("");
+        txtDireccion.setText("");
+        txtFono.setText("");
+        txtCapacidadMaxima.setText("");
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnListarRecintosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarRecintosActionPerformed
+        
+        this.refrescarListaRecintos();
+    }//GEN-LAST:event_btnListarRecintosActionPerformed
     
+    
+    private void refrescarListaRecintos() {
+       ((Util.jTableCustom.Models.jTableModelRecinto)jTableRecintosListar.getModel()).removerDatos();
+       
+       this.recintos = new DAO.ImplRecintoDAO().RecuperarRecinto_Todos();
+       recintos.forEach((recintos) -> {
+           ((Util.jTableCustom.Models.jTableModelRecinto)jTableRecintosListar.getModel()).cargarDatos(recintos);
+       } );
+       ((Util.jTableCustom.Models.jTableModelRecinto)this.jTableRecintosListar.getModel()).isCellEditable(0, 0);
+    }
     
     
     /**
@@ -465,6 +603,8 @@ public class AdministradorDeRecintos extends javax.swing.JFrame {
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnCrearUbicacion;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnListarRecintos;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnRecinto;
     private javax.swing.JButton btnUbicacion;
@@ -486,6 +626,8 @@ public class AdministradorDeRecintos extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanelCabezera;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableRecintosListar;
     private javax.swing.JTextField jTextFieldRun;
     private javax.swing.JPanel pnlRecinto;
     private javax.swing.JPanel pnlUbicacion;

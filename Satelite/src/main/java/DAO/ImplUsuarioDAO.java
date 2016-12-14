@@ -114,7 +114,7 @@ public class ImplUsuarioDAO implements IUsuarioDAO {
     }
     
     public void ModificarUsuario(Usuario usuario){
-        String var = usuario.toJSONString();
+        
         try{
             JSONObject _resultado = (JSONObject)JSONPARSER.parse(SERVICIO.modificarUsuario(usuario.toJSONString()));
             if (ContieneErrores(_resultado)) {
