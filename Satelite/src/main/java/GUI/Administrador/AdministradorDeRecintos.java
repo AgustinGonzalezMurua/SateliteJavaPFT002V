@@ -62,6 +62,8 @@ public class AdministradorDeRecintos extends javax.swing.JFrame {
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         btnCrearUbicacion = new javax.swing.JButton();
+        btnModificarUbicacion = new javax.swing.JButton();
+        btnEliminarUbicacion = new javax.swing.JButton();
         pnlRecinto = new javax.swing.JPanel();
         jLabelNombre = new javax.swing.JLabel();
         txtNombreRecinto = new javax.swing.JTextField();
@@ -137,6 +139,10 @@ public class AdministradorDeRecintos extends javax.swing.JFrame {
 
         btnCrearUbicacion.setText("Crear");
 
+        btnModificarUbicacion.setText("Modificar");
+
+        btnEliminarUbicacion.setText("eliminar");
+
         javax.swing.GroupLayout pnlUbicacionLayout = new javax.swing.GroupLayout(pnlUbicacion);
         pnlUbicacion.setLayout(pnlUbicacionLayout);
         pnlUbicacionLayout.setHorizontalGroup(
@@ -157,7 +163,12 @@ public class AdministradorDeRecintos extends javax.swing.JFrame {
                         .addGroup(pnlUbicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)))
-                    .addComponent(btnCrearUbicacion))
+                    .addGroup(pnlUbicacionLayout.createSequentialGroup()
+                        .addComponent(btnCrearUbicacion)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnModificarUbicacion)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEliminarUbicacion)))
                 .addContainerGap(211, Short.MAX_VALUE))
         );
         pnlUbicacionLayout.setVerticalGroup(
@@ -176,7 +187,10 @@ public class AdministradorDeRecintos extends javax.swing.JFrame {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCrearUbicacion)
+                .addGroup(pnlUbicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCrearUbicacion)
+                    .addComponent(btnModificarUbicacion)
+                    .addComponent(btnEliminarUbicacion))
                 .addContainerGap(212, Short.MAX_VALUE))
         );
 
@@ -603,9 +617,11 @@ public class AdministradorDeRecintos extends javax.swing.JFrame {
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnCrearUbicacion;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnEliminarUbicacion;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnListarRecintos;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnModificarUbicacion;
     private javax.swing.JButton btnRecinto;
     private javax.swing.JButton btnUbicacion;
     private javax.swing.JComboBox<String> cmbComuna;
