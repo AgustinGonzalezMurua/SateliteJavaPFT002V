@@ -29,10 +29,6 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
     
     public void CargarDatosUsuario(DTO.Usuario usuario){
         this.usuario = usuario;
-        this.jLabelNombreUsuario.setText(this.usuario.getNombre());
-        
-  
-        
     }
 
     /**
@@ -45,8 +41,6 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanelCabezera = new javax.swing.JPanel();
-        jLabelUsuario = new javax.swing.JLabel();
-        jLabelNombreUsuario = new javax.swing.JLabel();
         jLabelTitulo = new javax.swing.JLabel();
         jPanelContenido = new javax.swing.JPanel();
         jLabelEmail = new javax.swing.JLabel();
@@ -73,10 +67,6 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Creación de usuarios");
 
-        jLabelUsuario.setText("Usuario:");
-
-        jLabelNombreUsuario.setText("Usuario");
-
         jLabelTitulo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabelTitulo.setText("Creación de usuarios");
 
@@ -84,23 +74,12 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
         jPanelCabezera.setLayout(jPanelCabezeraLayout);
         jPanelCabezeraLayout.setHorizontalGroup(
             jPanelCabezeraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCabezeraLayout.createSequentialGroup()
-                .addGroup(jPanelCabezeraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelCabezeraLayout.createSequentialGroup()
-                        .addComponent(jLabelUsuario)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelNombreUsuario)))
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jLabelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanelCabezeraLayout.setVerticalGroup(
             jPanelCabezeraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCabezeraLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelCabezeraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelUsuario)
-                    .addComponent(jLabelNombreUsuario))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelTitulo)
                 .addContainerGap())
         );
@@ -236,25 +215,25 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelCabezera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanelContenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnListarUsuarios))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnListarUsuarios)
+                    .addComponent(jPanelCabezera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelContenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap()
                 .addComponent(jPanelCabezera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelContenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnListarUsuarios)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -262,13 +241,26 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         DTO.Usuario usu = new DTO.Usuario();
-         
-        usu.setNombre(txtNombre.getText());
-        usu.setRUN(txtRut.getText());
-        usu.setEmail(txtEmail.getText());
-        usu.setFono(Integer.parseInt(txtTelefono.getText()));
-        usu.setTipo(cmbTipoUsuario.getSelectedIndex());
-        new DAO.ImplUsuarioDAO().ModificarUsuario(usu);
+        try {
+            usu.setNombre(txtNombre.getText());
+            usu.setRUN(txtRut.getText());
+            usu.setEmail(txtEmail.getText());
+            usu.setFono(Integer.parseInt(txtTelefono.getText()));
+            usu.setTipo(cmbTipoUsuario.getSelectedIndex());
+            new DAO.ImplUsuarioDAO().ModificarUsuario(usu);
+            
+            JOptionPane.showMessageDialog(this,
+                "Modificado exitosamente",
+                "Éxito",
+                JOptionPane.PLAIN_MESSAGE);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                "No se logró modificar" + e.getMessage(),
+                "Error",
+                JOptionPane.PLAIN_MESSAGE);
+        }
+
 
     }//GEN-LAST:event_btnModificarActionPerformed
 
@@ -287,7 +279,7 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(this,
                 "Datos cargados exitosamente",
-                "Cagado",
+                "Cargado",
                 JOptionPane.PLAIN_MESSAGE);
 
         } catch (Exception e) {
@@ -435,12 +427,10 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelContraseña;
     private javax.swing.JLabel jLabelEmail;
     private javax.swing.JLabel jLabelNombre;
-    private javax.swing.JLabel jLabelNombreUsuario;
     private javax.swing.JLabel jLabelRun;
     private javax.swing.JLabel jLabelTelefono;
     private javax.swing.JLabel jLabelTipoUsuario;
     private javax.swing.JLabel jLabelTitulo;
-    private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanelCabezera;
     private javax.swing.JPanel jPanelContenido;
