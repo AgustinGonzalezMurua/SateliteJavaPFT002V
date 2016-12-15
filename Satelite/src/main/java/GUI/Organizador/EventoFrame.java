@@ -38,7 +38,7 @@ public class EventoFrame extends javax.swing.JDialog {
         this.jDialogTipoEvento.pack();
         this.jDialogRecintos.pack();
         
-        this.jListTiposEventos.setModel(new Util.jListModelTipoGenerics(this.tipoEventos));
+        this.jListTiposEventos.setModel(new Util.jListCustom.Models.jListModelTipoGenerics(this.tipoEventos));
         recintos.forEach((recinto) ->{
             ((Util.jTableCustom.Models.jTableModelRecinto)jTableRecintos.getModel()).cargarDatos(recinto);
         });

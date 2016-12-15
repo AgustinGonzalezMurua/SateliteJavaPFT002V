@@ -64,11 +64,11 @@ public class ImplUsuarioDAO implements IUsuarioDAO {
             if (_resultado.containsKey("Error")) {
                 throw new ServiceError("Ha ocurrido un error: " + _resultado.get("Error").toString());
             }else{
-                _usuario.setRUN(RUN);
-                _usuario.setTipo(Integer.parseInt(_resultado.get("Tipo").toString()));
+                _usuario.setRUN(RUN);                
                 _usuario.setNombre(_resultado.get("Nombre").toString());
                 _usuario.setEmail(_resultado.get("Email").toString());
                 _usuario.setFono(Integer.parseInt(_resultado.get("Fono").toString()));
+                _usuario.setTipo(Integer.parseInt(_resultado.get("Tipo").toString()));
             }
             return _usuario;
             

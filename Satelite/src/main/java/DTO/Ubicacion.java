@@ -16,6 +16,9 @@ public class Ubicacion {
     private int Codigo;
     private char Fila; 
     private int Recinto;
+    
+    public Ubicacion(){
+    }
 
     public Ubicacion(JSONObject json) throws ParseException, java.text.ParseException {
         this.Codigo = Integer.parseInt(json.get("Codigo").toString());

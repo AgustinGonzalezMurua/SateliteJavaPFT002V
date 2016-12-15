@@ -94,6 +94,7 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
         jLabelContraseña.setText("Contraseña");
 
         cmbTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Supervisor", "Organizador", "Cliente" }));
+        cmbTipoUsuario.setSelectedIndex(1);
 
         jLabelTipoUsuario.setText("Tipo de Usuario");
 
@@ -287,7 +288,7 @@ public class AdministradorDeUsuarios extends javax.swing.JFrame {
             txtEmail.setText(usu.getEmail());
             Integer fono = usu.getFono();
             txtTelefono.setText(fono.toString());            
-            cmbTipoUsuario.setSelectedIndex(usu.getTipo());
+            cmbTipoUsuario.setSelectedItem(usu.getTipo());
 
             JOptionPane.showMessageDialog(this,
                 "Datos cargados exitosamente",

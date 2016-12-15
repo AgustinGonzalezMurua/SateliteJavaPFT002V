@@ -24,6 +24,7 @@ public class Recinto {
     private ArrayList<Ubicacion> Ubicaciones;
 
     public Recinto() {
+        
     }
 
     public Recinto(JSONObject json)throws ParseException, java.text.ParseException {
@@ -109,8 +110,7 @@ public class Recinto {
                 + "\"Direccion\" : \"" + Direccion + "\","
                 + "\"Comuna\" : " + Comuna + ","
                 + "\"CapacidadMaxima\" : \"" + CapacidadMaxima + "\","
-                + "\"Fono\" : \"" + Fono + "\","
-                + "\"Ubicaciones\" : \"" + Ubicaciones.toString() + "\""
+                + "\"Fono\" : \"" + Fono + "\""
                 + '}';
     }
     

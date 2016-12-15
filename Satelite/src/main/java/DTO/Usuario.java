@@ -10,7 +10,7 @@ public class Usuario {
     private String Nombre;
     private int Fono;
     private String Email;
-    private int Estado;
+
     
     public Usuario() {
     }
@@ -20,17 +20,9 @@ public class Usuario {
         this.setTipo(Integer.parseInt(jobject.get("Tipo").toString()));
         this.setNombre(jobject.get("Nombre").toString());
         this.setFono(Integer.parseInt(jobject.get("Fono").toString()));
-        this.setEmail(jobject.get("Email").toString());
-        this.setEstado(Integer.parseInt(jobject.get("Estado").toString()));
+        this.setEmail(jobject.get("Email").toString());        
    }
-     public int getEstado()
-   {
-       return Estado;
-   }
-   public void setEstado(int estado)
-   {
-       this.Estado = estado;
-   }
+
     
     public String getEmail() {
         return Email;
@@ -79,8 +71,7 @@ public class Usuario {
                 + "\"Tipo\" : \"" + Tipo + "\","
                 + "\"Nombre\" : \"" + Nombre + "\"," 
                 + "\"Fono\" : \"" + Fono + "\","
-                + "\"Correo\" : \"" + Email + "\"," 
-                + "\"Estado\" : \"" + Estado + "\"" 
+                + "\"Correo\" : \"" + Email + "\""                 
                 +'}';
     }
     
